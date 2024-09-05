@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productivity Task Scheduler</title>
+</head>
+<body>
+<div class="container">
+    <!-- Left Menu -->
+    <div class="menu">
+        <h2>Menu</h2>
+        <ul>
+            <li>Dashboard</li>
+            <li>Tasks</li>
+            <li>Calendar</li>
+            <li>Settings</li>
+        </ul>
+    </div>
+
+    <!-- Hourly Schedule -->
+    <div class="scheduler">
+        <div class="task-form">
+            <input type="text" id="task-name" placeholder="Task Name" required>
+            <input type="time" id="start-time" placeholder="Start time (HH:MM)" required>
+            <input type="time" id="end-time" placeholder="End time (HH:MM)" required>
+            <input type="date" id="start-date" placeholder="Start Date" required>
+            <input type="date" id="end-date" placeholder="End Date" required>
+            <textarea id="task-description" placeholder="Task Description"></textarea>
+            <button id="add-task-btn">Add Task</button>
+        </div>
+        <h2>Daily Schedule</h2>
+        <div class="hours" id="hours">
+            <div class="hour">00:00</div><hr>
+            <div class="hour">01:00</div><hr>
+            <div class="hour">02:00</div><hr>
+            <div class="hour">03:00</div><hr>
+            <div class="hour">04:00</div><hr>
+            <div class="hour">05:00</div><hr>
+            <div class="hour">06:00</div><hr>
+            <div class="hour">07:00</div><hr>
+            <div class="hour">08:00</div><hr>
+            <div class="hour">09:00</div><hr>
+            <div class="hour">10:00</div><hr>
+            <div class="hour">11:00</div><hr>
+            <div class="hour">12:00</div><hr>
+            <div class="hour">13:00</div><hr>
+            <div class="hour">14:00</div><hr>
+            <div class="hour">15:00</div><hr>
+            <div class="hour">16:00</div><hr>
+            <div class="hour">17:00</div><hr>
+            <div class="hour">18:00</div><hr>
+            <div class="hour">19:00</div><hr>
+            <div class="hour">20:00</div><hr>
+            <div class="hour">21:00</div><hr>
+            <div class="hour">22:00</div><hr>
+            <div class="hour">23:00</div><hr>
+            <div class="hour">24:00</div>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -4,7 +4,11 @@ import com.example.productivity_app.entity.Task;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+import java.util.List;
+
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long> {
     // Custom query methods (if needed) can be added here
+    List<Task> findByStartDate(LocalDate startDate);
 }

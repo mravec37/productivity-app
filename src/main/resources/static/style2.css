@@ -10,7 +10,7 @@ body {
 }
 
 .menu {
-    width: 250px;
+    width: 150px;
     background-color: #333;
     color: white;
     padding: 20px;
@@ -55,6 +55,15 @@ body {
 .hour {
     position: relative;
     height: 125px;
+}
+
+.hours-wrapper {
+    display: inline-block;
+    width: 19%;
+    margin-left: 10px;
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 8px;      /* Rounded corners */
+    background-color: #f5f5f5; /* Slightly darker than white */
 }
 
 hr {

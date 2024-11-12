@@ -23,7 +23,7 @@ function addTask() {
     };
 
     // Make the POST request with a JSON body
-    fetch('http://localhost:8080/task/createTask', {
+    fetch('http://192.168.1.36:8080/task/createTask', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -36,31 +36,51 @@ function addTask() {
         }
         return response.json();
     })
-    .then(data => handleApiResponse(data, taskName, taskDescription, startTime, endTime)) // Pass taskName and taskDescription along with times
+    .then(data => handleApiResponse(data, taskName, taskDescription, startTime, endTime, startDate, endDate)) // Pass taskName and taskDescription along with times
     .catch(error => {
-        alert('Error connecting to the server: ' + error);
+        alert('Error connecting to the server:  ' + error);
     });
 }
 
 // Handle the response from the API
-function handleApiResponse(data, taskName, taskDescription, startTime, endTime) {
+function handleApiResponse(data, taskName, taskDescription, startTime, endTime, startDate, endDate) {
     if (data.message === 'Success') {
-        createTaskElement(taskName, taskDescription, startTime, endTime);  // Pass taskName and taskDescription
+        createTaskElement(taskName, taskDescription, startTime, endTime, startDate, endDate);  // Pass taskName and taskDescription
     } else {
         alert('Failed to create task on the server.');
     }
 }
 
 // Create a visual element for the task in the scheduler
-function createTaskElement(taskName, taskDescription, startTime, endTime) {
+function createTaskElement(taskName, taskDescription, startTime, endTime, startDate, endDate) {
     const hourDivs = document.querySelectorAll('.hour');
 
     // Parse start and end time to get hours and minutes
     const [startHours, startMinutes] = startTime.split(':').map(Number);
     const [endHours, endMinutes] = endTime.split(':').map(Number);
 
-    const startHourDiv = hourDivs[startHours];  // Find the div corresponding to the start hour
+    // Convert startDate to a Date object for comparison
+    const taskStartDate = new Date(startDate); // assuming startDate is in 'YYYY-MM-DD' format
+    const chosenDateObj = new Date(chosenDate); // chosenDate is also assumed to be a Date object
 
+    // Calculate the difference in days between chosenDate and taskStartDate
+    const dayDifference = Math.floor((taskStartDate - chosenDateObj) / (1000 * 60 * 60 * 24));
+
+    // Check if dayDifference is within 0 to 4
+    if (dayDifference < 0 || dayDifference > 4) {
+        alert('Task date is out of the allowed range.');
+        return;
+    }
+
+    // Select the correct scheduler div based on dayDifference
+    const scheduler = document.querySelector(`#hours${dayDifference === 0 ? '' : dayDifference}`);
+
+    if (!scheduler) {
+        alert('Could not find the corresponding scheduler div. ' + dayDifference);
+        return;
+    }
+
+    const startHourDiv = hourDivs[startHours];
     if (!startHourDiv) {
         alert('Could not find the corresponding hour div.');
         return;
@@ -94,8 +114,7 @@ function createTaskElement(taskName, taskDescription, startTime, endTime) {
     task.style.top = `${taskTop}px`;
     task.style.height = `${taskHeight}px`;
 
-    // Add the task to the scheduler
-    const scheduler = document.querySelector('.hours');
+    // Add the task to the appropriate scheduler div
     scheduler.appendChild(task);
 }
 

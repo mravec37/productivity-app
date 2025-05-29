@@ -1,4 +1,4 @@
-# 🗓️ Task Manager App
+# 🗓️ ProductivityApp
 
 Webová aplikácia na správu denných úloh s overením e-mailu, štatistikami. Frontend komunikuje so Spring Boot Backendom pomocou REST API.  
 

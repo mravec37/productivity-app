@@ -31,7 +31,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(
                                 "/",                // Root URL
-                                "/pictures/**",
+                                "/pictures/logo.png",
                                 "/index.html",   // Main HTML page
                                 "/auth.css",
                                 "/auth/**",                  // Auth endpoints

@@ -19,11 +19,11 @@ Webová aplikácia na správu denných úloh s overením e-mailu, štatistikami.
 
 ## 🖼️ Náhľady aplikácie
 
-<img src="screenshots/login.png" width="600" alt="Registrácia">
-<img src="screenshots/tasks.png" width="600" alt="Zoznam taskov">
-<img src="screenshots/tasks2.png" width="600" alt="Zoznam taskov 2">
-<img src="screenshots/createTask.png" width="600" alt="Vytvorenie tasku">
-<img src="screenshots/profile.png" width="600" alt="Profil">
+<img src="Screenshots/login.png" width="600" alt="Registrácia">
+<img src="Screenshots/tasks.png" width="600" alt="Zoznam taskov">
+<img src="Screenshots/tasks2.png" width="600" alt="Zoznam taskov 2">
+<img src="Screenshots/createTask.png" width="600" alt="Vytvorenie tasku">
+<img src="Screenshots/profile.png" width="600" alt="Profil">
 
 ---
 

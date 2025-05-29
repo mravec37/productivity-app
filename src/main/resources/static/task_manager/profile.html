@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="style2.css">
+  <link rel="stylesheet" href="profileStyle.css">
+  <link rel="stylesheet" href="popup-window.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Productivity Task Scheduler</title>
+</head>
+<body>
+<div class="container">
+  <div class="menu">
+    <img src="pictures/logo.png" alt="Logo" class="logo-img">
+    <h2>Menu</h2>
+    <ul>
+      <li>Rozvrh</li>
+      <li>Profil</li>
+    </ul>
+  </div>
+  <div class="scheduler">
+    <div class="task-form">
+      <h2>Profil</h2>
+      <p>Vitaj, <span id="usernameDisplay">Načítavam...</span>!</p>
+    </div>
+    <button id="logoutBtn" class="logout-button">Odhlásiť sa</button>
+
+    <div class="info-boxes">
+      <div id="taskSummary" class="info-box">
+        <h3>Prehľad úloh</h3>
+      </div>
+      <div id="longestTaskSummary" class="info-box">
+        <h3>Najdlhšia úloha</h3>
+      </div>
+      <div id="peakTaskDayInfo" class="info-box">
+        <h3>Najviac úloh v deň</h3>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script src="profileScript.js"></script>
+</body>
+</html>

@@ -6,7 +6,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CreateTaskResponseDTO {
+public class UpdateTaskDTO {
+
     private String message;
     private Task task;
 }

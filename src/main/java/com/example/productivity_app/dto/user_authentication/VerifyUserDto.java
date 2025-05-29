@@ -1,0 +1,11 @@
+package com.example.productivity_app.dto.user_authentication;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class VerifyUserDto {
+    private String email;
+    private String verificationCode;
+}

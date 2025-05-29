@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="popup-window.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productivity Task Scheduler</title>
+</head>
+<body>
+<div class="container">
+    <!-- Left Menu -->
+    <div class="menu">
+        <img src="pictures/logo.png" alt="Logo" class="logo-img">
+        <h2>Menu</h2>
+        <ul>
+            <li>Rozvrh</li>
+            <li>Profil</li>
+        </ul>
+    </div>
+
+    <!-- Hourly Schedule -->
+    <!-- Hourly Schedule -->
+    <div class="scheduler">
+        <div class="task-form">
+            <h2>Úlohy</h2>
+            <button id="prev-date-btn">&lt;</button>
+            <input type="date" id="chosen-date" placeholder="Dátum" required>
+            <button id="next-date-btn">&gt;</button>
+            <button id="create-task-popup">Pridať</button>
+        </div>
+
+        <div id="task-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-modal" class="close">&times;</span>
+            <div class="task-options-container">
+                <div class="task-fields">
+                    <h2 class="create-task-h2">Vytvoriť úlohu</h2>
+                    <input type="text" id="task-name" placeholder="Názov úlohy" required>
+                    <input type="time" id="start-time" placeholder="Začiatok (HH:MM)" required>
+                    <input type="time" id="end-time" placeholder="Koniec (HH:MM)" required>
+                    <input type="date" id="start-date" placeholder="Od: " required>
+                    <input type="date" id="end-date" placeholder="Do: " required>
+                    <textarea id="task-description" placeholder="Popis úlohy"></textarea>
+                    <button id="add-task-btn">Pridať</button>
+                </div>
+                <div class="secondary-options">
+                    <div class="color-options">
+                        <h3>Vyberte farbu:</h3>
+                        <div class="color-buttons">
+                            <div>
+                                <button class="color-btn" data-color="#ff2c2c" style="background-color: #ff2c2c;"></button>
+                                <button class="color-btn" data-color="#007bff" style="background-color: #007bff;"></button>
+                                <button class="color-btn" data-color="#4CAF50" style="background-color: #4CAF50;"></button>
+                                <button class="color-btn" data-color="#8F00FF" style="background-color: #8F00FF;"></button>
+                            </div>
+                            <div>
+                                <button class="color-btn" data-color="#FF6C3A" style="background-color: #FF6C3A;"></button>
+                                <button class="color-btn" data-color="#232C3B" style="background-color: #232C3B;"></button>
+                                <button class="color-btn" data-color="#ff007f" style="background-color: #ff007f;"></button>
+                                <button class="color-btn" data-color="#FFAA1D" style="background-color: #FFAA1D;"></button>
+                                <!-- <button class="color-btn-update" data-color="#2752D6" style="background-color: #2752D6;"></button> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <div id="task-modal-update" class="modal-update">
+            <div class="modal-content-update">
+                <span id="close-modal-update" class="close-update">&times;</span>
+                <div class="task-options-container">
+                    <div class="task-fields">
+                        <h2 class="create-task-h2">Upraviť úlohu</h2>
+                        <input type="text" id="task-name-update" placeholder="Názov úlohy" required>
+                        <input type="time" id="start-time-update" placeholder="Začiatok (HH:MM)" required>
+                        <input type="time" id="end-time-update" placeholder="Koniec (HH:MM)" required>
+                        <input type="date" id="start-date-update" placeholder="Od: " required>
+                        <input type="date" id="end-date-update" placeholder="Do: " required>
+                        <textarea id="task-description-update" placeholder="Popis úlohy"></textarea>
+                        <button id="add-task-btn-update">Upraviť</button>
+                    </div>
+                    <div class="secondary-options">
+                        <div class="color-options">
+                            <h3>Vyberte farbu:</h3>
+                            <div class="color-buttons">
+                                <div>
+                                    <button class="color-btn-update" data-color="#ff2c2c" style="background-color: #ff2c2c;"></button>
+                                    <button class="color-btn-update" data-color="#007bff" style="background-color: #007bff;"></button>
+                                    <button class="color-btn-update" data-color="#4CAF50" style="background-color: #4CAF50;"></button>
+                                    <button class="color-btn-update" data-color="#8F00FF" style="background-color: #8F00FF;"></button>
+                                </div>
+                                <div>
+                                    <button class="color-btn-update" data-color="#FF6C3A" style="background-color: #FF6C3A;"></button>
+                                    <button class="color-btn-update" data-color="#232C3B" style="background-color: #232C3B;"></button>
+                                    <button class="color-btn-update" data-color="#ff007f" style="background-color: #ff007f;"></button>
+                                    <button class="color-btn-update" data-color="#FFAA1D" style="background-color: #FFAA1D;"></button>
+                                   <!-- <button class="color-btn-update" data-color="#2752D6" style="background-color: #2752D6;"></button> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class = "day-wrapper">
+            <div class="day-info" id="day-info0">
+                <h2>6</h2>
+                <h2>12</h2>
+                <h2>Pondelok</h2>
+            </div>
+        <div class = "hours-wrapper">
+        <div class="hours" id="hours">
+            <div class="hour">00:00 <hr class="half"></div><hr>
+            <div class="hour">01:00<hr class="half"></div><hr>
+            <div class="hour">02:00<hr class="half"></div><hr>
+            <div class="hour">03:00<hr class="half"></div><hr>
+            <div class="hour">04:00<hr class="half"></div><hr>
+            <div class="hour">05:00<hr class="half"></div><hr>
+            <div class="hour">06:00<hr class="half"></div><hr>
+            <div class="hour">07:00<hr class="half"></div><hr>
+            <div class="hour">08:00<hr class="half"></div><hr>
+            <div class="hour">09:00<hr class="half"></div><hr>
+            <div class="hour">10:00<hr class="half"></div><hr>
+            <div class="hour">11:00<hr class="half"></div><hr>
+            <div class="hour">12:00<hr class="half"></div><hr>
+            <div class="hour">13:00<hr class="half"></div><hr>
+            <div class="hour">14:00<hr class="half"></div><hr>
+            <div class="hour">15:00<hr class="half"></div><hr>
+            <div class="hour">16:00<hr class="half"></div><hr>
+            <div class="hour">17:00<hr class="half"></div><hr>
+            <div class="hour">18:00<hr class="half"></div><hr>
+            <div class="hour">19:00<hr class="half"></div><hr>
+            <div class="hour">20:00<hr class="half"></div><hr>
+            <div class="hour">21:00<hr class="half"></div><hr>
+            <div class="hour">22:00<hr class="half"></div><hr>
+            <div class="hour">23:00<hr class="half"></div><hr>
+        </div>
+        </div>
+        </div>
+        <div class = "day-wrapper">
+            <div class="day-info" id="day-info1">
+                <h2>7</h2>
+                <h2>12</h2>
+                <h2>Pondelok</h2>
+            </div>
+        <div class ="hours-wrapper">
+        <div class="hours" id="hours1">
+            <div class="hour">00:00 <hr class="half"></div><hr>
+            <div class="hour">01:00<hr class="half"></div><hr>
+            <div class="hour">02:00<hr class="half"></div><hr>
+            <div class="hour">03:00<hr class="half"></div><hr>
+            <div class="hour">04:00<hr class="half"></div><hr>
+            <div class="hour">05:00<hr class="half"></div><hr>
+            <div class="hour">06:00<hr class="half"></div><hr>
+            <div class="hour">07:00<hr class="half"></div><hr>
+            <div class="hour">08:00<hr class="half"></div><hr>
+            <div class="hour">09:00<hr class="half"></div><hr>
+            <div class="hour">10:00<hr class="half"></div><hr>
+            <div class="hour">11:00<hr class="half"></div><hr>
+            <div class="hour">12:00<hr class="half"></div><hr>
+            <div class="hour">13:00<hr class="half"></div><hr>
+            <div class="hour">14:00<hr class="half"></div><hr>
+            <div class="hour">15:00<hr class="half"></div><hr>
+            <div class="hour">16:00<hr class="half"></div><hr>
+            <div class="hour">17:00<hr class="half"></div><hr>
+            <div class="hour">18:00<hr class="half"></div><hr>
+            <div class="hour">19:00<hr class="half"></div><hr>
+            <div class="hour">20:00<hr class="half"></div><hr>
+            <div class="hour">21:00<hr class="half"></div><hr>
+            <div class="hour">22:00<hr class="half"></div><hr>
+            <div class="hour">23:00<hr class="half"></div><hr>
+        </div>
+        </div>
+        </div>
+        <div class = "day-wrapper">
+            <div class="day-info" id="day-info2">
+                <h2>7</h2>
+                <h2>12</h2>
+                <h2>Pondelok</h2>
+            </div>
+        <div class = "hours-wrapper">
+            <div class="hours" id="hours2">
+                <div class="hour">00:00 <hr class="half"></div><hr>
+                <div class="hour">01:00<hr class="half"></div><hr>
+                <div class="hour">02:00<hr class="half"></div><hr>
+                <div class="hour">03:00<hr class="half"></div><hr>
+                <div class="hour">04:00<hr class="half"></div><hr>
+                <div class="hour">05:00<hr class="half"></div><hr>
+                <div class="hour">06:00<hr class="half"></div><hr>
+                <div class="hour">07:00<hr class="half"></div><hr>
+                <div class="hour">08:00<hr class="half"></div><hr>
+                <div class="hour">09:00<hr class="half"></div><hr>
+                <div class="hour">10:00<hr class="half"></div><hr>
+                <div class="hour">11:00<hr class="half"></div><hr>
+                <div class="hour">12:00<hr class="half"></div><hr>
+                <div class="hour">13:00<hr class="half"></div><hr>
+                <div class="hour">14:00<hr class="half"></div><hr>
+                <div class="hour">15:00<hr class="half"></div><hr>
+                <div class="hour">16:00<hr class="half"></div><hr>
+                <div class="hour">17:00<hr class="half"></div><hr>
+                <div class="hour">18:00<hr class="half"></div><hr>
+                <div class="hour">19:00<hr class="half"></div><hr>
+                <div class="hour">20:00<hr class="half"></div><hr>
+                <div class="hour">21:00<hr class="half"></div><hr>
+                <div class="hour">22:00<hr class="half"></div><hr>
+                <div class="hour">23:00<hr class="half"></div><hr>
+            </div>
+        </div>
+        </div>
+        <div class = "day-wrapper">
+            <div class="day-info" id="day-info3">
+                <h2>7</h2>
+                <h2>12</h2>
+                <h2>Pondelok</h2>
+            </div>
+        <div class ="hours-wrapper">
+            <div class="hours" id="hours3">
+                <div class="hour">00:00 <hr class="half"></div><hr>
+                <div class="hour">01:00<hr class="half"></div><hr>
+                <div class="hour">02:00<hr class="half"></div><hr>
+                <div class="hour">03:00<hr class="half"></div><hr>
+                <div class="hour">04:00<hr class="half"></div><hr>
+                <div class="hour">05:00<hr class="half"></div><hr>
+                <div class="hour">06:00<hr class="half"></div><hr>
+                <div class="hour">07:00<hr class="half"></div><hr>
+                <div class="hour">08:00<hr class="half"></div><hr>
+                <div class="hour">09:00<hr class="half"></div><hr>
+                <div class="hour">10:00<hr class="half"></div><hr>
+                <div class="hour">11:00<hr class="half"></div><hr>
+                <div class="hour">12:00<hr class="half"></div><hr>
+                <div class="hour">13:00<hr class="half"></div><hr>
+                <div class="hour">14:00<hr class="half"></div><hr>
+                <div class="hour">15:00<hr class="half"></div><hr>
+                <div class="hour">16:00<hr class="half"></div><hr>
+                <div class="hour">17:00<hr class="half"></div><hr>
+                <div class="hour">18:00<hr class="half"></div><hr>
+                <div class="hour">19:00<hr class="half"></div><hr>
+                <div class="hour">20:00<hr class="half"></div><hr>
+                <div class="hour">21:00<hr class="half"></div><hr>
+                <div class="hour">22:00<hr class="half"></div><hr>
+                <div class="hour">23:00<hr class="half"></div><hr>
+            </div>
+        </div>
+        </div>
+        <div class = "day-wrapper">
+            <div class="day-info" id="day-info4">
+                <h2>7</h2>
+                <h2>12</h2>
+                <h2>Pondelok</h2>
+            </div>
+        <div class ="hours-wrapper">
+            <div class="hours" id="hours4">
+                <div class="hour">00:00 <hr class="half"></div><hr>
+                <div class="hour">01:00<hr class="half"></div><hr>
+                <div class="hour">02:00<hr class="half"></div><hr>
+                <div class="hour">03:00<hr class="half"></div><hr>
+                <div class="hour">04:00<hr class="half"></div><hr>
+                <div class="hour">05:00<hr class="half"></div><hr>
+                <div class="hour">06:00<hr class="half"></div><hr>
+                <div class="hour">07:00<hr class="half"></div><hr>
+                <div class="hour">08:00<hr class="half"></div><hr>
+                <div class="hour">09:00<hr class="half"></div><hr>
+                <div class="hour">10:00<hr class="half"></div><hr>
+                <div class="hour">11:00<hr class="half"></div><hr>
+                <div class="hour">12:00<hr class="half"></div><hr>
+                <div class="hour">13:00<hr class="half"></div><hr>
+                <div class="hour">14:00<hr class="half"></div><hr>
+                <div class="hour">15:00<hr class="half"></div><hr>
+                <div class="hour">16:00<hr class="half"></div><hr>
+                <div class="hour">17:00<hr class="half"></div><hr>
+                <div class="hour">18:00<hr class="half"></div><hr>
+                <div class="hour">19:00<hr class="half"></div><hr>
+                <div class="hour">20:00<hr class="half"></div><hr>
+                <div class="hour">21:00<hr class="half"></div><hr>
+                <div class="hour">22:00<hr class="half"></div><hr>
+                <div class="hour">23:00<hr class="half"></div><hr>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+<script src="taskLoader.js"></script>
+<script src="script2.js"></script>
+</body>
+</html>

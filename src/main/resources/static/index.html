@@ -1,186 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sk">
 <head>
-    <link rel="stylesheet" href="style2.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productivity Task Scheduler</title>
+  <link rel="stylesheet" href="auth.css">
+  <meta charset="UTF-8">
+  <title>Prihlasovanie</title>
 </head>
 <body>
-<div class="container">
-    <!-- Left Menu -->
-    <div class="menu">
-        <h2>Menu</h2>
-        <ul>
-            <li>Dashboard</li>
-            <li>Tasks</li>
-            <li>Calendar</li>
-            <li>Settings</li>
-        </ul>
-    </div>
+<div class="auth-container">
+  <h1>Prihlásenie</h1>
 
-    <!-- Hourly Schedule -->
-    <div class="scheduler">
-        <div class="task-form">
-            <input type="date" id="chosen-date" placeholder="Date" required>
-            <input type="text" id="task-name" placeholder="Task Name" required>
-            <input type="time" id="start-time" placeholder="Start time (HH:MM)" required>
-            <input type="time" id="end-time" placeholder="End time (HH:MM)" required>
-            <input type="date" id="start-date" placeholder="Start Date" required>
-            <input type="date" id="end-date" placeholder="End Date" required>
-            <textarea id="task-description" placeholder="Task Description"></textarea>
-            <button id="add-task-btn">Add Task</button>
-        </div>
-        <h2>Daily Schedule</h2>
-        <div class = hours-wrapper>
-        <div class="hours" id="hours">
-            <div class="hour">00:00</div><hr>
-            <div class="hour">01:00</div><hr>
-            <div class="hour">02:00</div><hr>
-            <div class="hour">03:00</div><hr>
-            <div class="hour">04:00</div><hr>
-            <div class="hour">05:00</div><hr>
-            <div class="hour">06:00</div><hr>
-            <div class="hour">07:00</div><hr>
-            <div class="hour">08:00</div><hr>
-            <div class="hour">09:00</div><hr>
-            <div class="hour">10:00</div><hr>
-            <div class="hour">11:00</div><hr>
-            <div class="hour">12:00</div><hr>
-            <div class="hour">13:00</div><hr>
-            <div class="hour">14:00</div><hr>
-            <div class="hour">15:00</div><hr>
-            <div class="hour">16:00</div><hr>
-            <div class="hour">17:00</div><hr>
-            <div class="hour">18:00</div><hr>
-            <div class="hour">19:00</div><hr>
-            <div class="hour">20:00</div><hr>
-            <div class="hour">21:00</div><hr>
-            <div class="hour">22:00</div><hr>
-            <div class="hour">23:00</div><hr>
-            <div class="hour">24:00</div>
-        </div>
-        </div>
-        <div class = hours-wrapper>
-        <div class="hours" id="hours1">
-            <div class="hour">00:00</div><hr>
-            <div class="hour">01:00</div><hr>
-            <div class="hour">02:00</div><hr>
-            <div class="hour">03:00</div><hr>
-            <div class="hour">04:00</div><hr>
-            <div class="hour">05:00</div><hr>
-            <div class="hour">06:00</div><hr>
-            <div class="hour">07:00</div><hr>
-            <div class="hour">08:00</div><hr>
-            <div class="hour">09:00</div><hr>
-            <div class="hour">10:00</div><hr>
-            <div class="hour">11:00</div><hr>
-            <div class="hour">12:00</div><hr>
-            <div class="hour">13:00</div><hr>
-            <div class="hour">14:00</div><hr>
-            <div class="hour">15:00</div><hr>
-            <div class="hour">16:00</div><hr>
-            <div class="hour">17:00</div><hr>
-            <div class="hour">18:00</div><hr>
-            <div class="hour">19:00</div><hr>
-            <div class="hour">20:00</div><hr>
-            <div class="hour">21:00</div><hr>
-            <div class="hour">22:00</div><hr>
-            <div class="hour">23:00</div><hr>
-            <div class="hour">24:00</div>
-        </div>
-        </div>
-        <div class = hours-wrapper>
-            <div class="hours" id="hours2">
-                <div class="hour">00:00</div><hr>
-                <div class="hour">01:00</div><hr>
-                <div class="hour">02:00</div><hr>
-                <div class="hour">03:00</div><hr>
-                <div class="hour">04:00</div><hr>
-                <div class="hour">05:00</div><hr>
-                <div class="hour">06:00</div><hr>
-                <div class="hour">07:00</div><hr>
-                <div class="hour">08:00</div><hr>
-                <div class="hour">09:00</div><hr>
-                <div class="hour">10:00</div><hr>
-                <div class="hour">11:00</div><hr>
-                <div class="hour">12:00</div><hr>
-                <div class="hour">13:00</div><hr>
-                <div class="hour">14:00</div><hr>
-                <div class="hour">15:00</div><hr>
-                <div class="hour">16:00</div><hr>
-                <div class="hour">17:00</div><hr>
-                <div class="hour">18:00</div><hr>
-                <div class="hour">19:00</div><hr>
-                <div class="hour">20:00</div><hr>
-                <div class="hour">21:00</div><hr>
-                <div class="hour">22:00</div><hr>
-                <div class="hour">23:00</div><hr>
-                <div class="hour">24:00</div>
-            </div>
-        </div>
-        <div class = hours-wrapper>
-            <div class="hours" id="hours3">
-                <div class="hour">00:00</div><hr>
-                <div class="hour">01:00</div><hr>
-                <div class="hour">02:00</div><hr>
-                <div class="hour">03:00</div><hr>
-                <div class="hour">04:00</div><hr>
-                <div class="hour">05:00</div><hr>
-                <div class="hour">06:00</div><hr>
-                <div class="hour">07:00</div><hr>
-                <div class="hour">08:00</div><hr>
-                <div class="hour">09:00</div><hr>
-                <div class="hour">10:00</div><hr>
-                <div class="hour">11:00</div><hr>
-                <div class="hour">12:00</div><hr>
-                <div class="hour">13:00</div><hr>
-                <div class="hour">14:00</div><hr>
-                <div class="hour">15:00</div><hr>
-                <div class="hour">16:00</div><hr>
-                <div class="hour">17:00</div><hr>
-                <div class="hour">18:00</div><hr>
-                <div class="hour">19:00</div><hr>
-                <div class="hour">20:00</div><hr>
-                <div class="hour">21:00</div><hr>
-                <div class="hour">22:00</div><hr>
-                <div class="hour">23:00</div><hr>
-                <div class="hour">24:00</div>
-            </div>
-        </div>
-        <div class = hours-wrapper>
-            <div class="hours" id="hours4">
-                <div class="hour">00:00</div><hr>
-                <div class="hour">01:00</div><hr>
-                <div class="hour">02:00</div><hr>
-                <div class="hour">03:00</div><hr>
-                <div class="hour">04:00</div><hr>
-                <div class="hour">05:00</div><hr>
-                <div class="hour">06:00</div><hr>
-                <div class="hour">07:00</div><hr>
-                <div class="hour">08:00</div><hr>
-                <div class="hour">09:00</div><hr>
-                <div class="hour">10:00</div><hr>
-                <div class="hour">11:00</div><hr>
-                <div class="hour">12:00</div><hr>
-                <div class="hour">13:00</div><hr>
-                <div class="hour">14:00</div><hr>
-                <div class="hour">15:00</div><hr>
-                <div class="hour">16:00</div><hr>
-                <div class="hour">17:00</div><hr>
-                <div class="hour">18:00</div><hr>
-                <div class="hour">19:00</div><hr>
-                <div class="hour">20:00</div><hr>
-                <div class="hour">21:00</div><hr>
-                <div class="hour">22:00</div><hr>
-                <div class="hour">23:00</div><hr>
-                <div class="hour">24:00</div>
-            </div>
-        </div>
+  <div id="signup-section">
+    <h2>Registrácia</h2>
+    <form id="signup-form">
+      <input type="text" id="signup-username" placeholder="Používateľské meno" required>
+      <input type="email" id="signup-email" placeholder="Email" required>
+      <input type="password" id="signup-password" placeholder="Heslo" required>
+      <button type="submit">Zaregistrovať sa</button>
+    </form>
+  </div>
+
+  <div id="verify-section" style="display: none;">
+    <h2>Overenie účtu</h2>
+    <div class="verify-group">
+      <input type="text" id="verify-code" placeholder="Overovací kód">
+      <button id="verify-btn">Overiť</button>
+      <button id="resend-btn" style="margin-top: 0.5rem; background-color: #777;">Znovu poslať kód</button>
     </div>
+  </div>
+
+  <div id="login-section">
+    <h2>Prihlásenie</h2>
+    <form id="login-form">
+      <input type="email" id="login-email" placeholder="Email" required>
+      <input type="password" id="login-password" placeholder="Heslo" required>
+      <button type="submit">Prihlásiť sa</button>
+    </form>
+  </div>
+
+  <div id="message"></div>
 </div>
 
-<script src="taskLoader.js"></script>
-<script src="script2.js"></script>
+<script src="authJS.js"></script>
 </body>
 </html>

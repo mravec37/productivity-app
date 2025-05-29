@@ -1,6 +1,7 @@
 package com.example.productivity_app.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -36,4 +37,11 @@ public class Task {
     @Column(name = "task_description")
     private String taskDescription;
 
+    @Column(name = "task_color")
+    private String taskColor;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
+    private User user;
 }

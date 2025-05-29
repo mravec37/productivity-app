@@ -1,0 +1,43 @@
+ .info-boxes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .info-box {
+      background-color: #f9f9f9;
+      border-radius: 12px;
+      padding: 20px;
+      flex: 1 1 250px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .info-box h3 {
+      margin-bottom: 10px;
+      color: #333;
+    }
+    .info-box .highlight {
+      font-size: 24px;
+      font-weight: bold;
+      color: #2b9348;
+    }
+    .logout-button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #ff2c2c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .highlight-number {
+      font-weight: bold;
+      color: #007bff;
+      font-size: 1.1em;
+    }

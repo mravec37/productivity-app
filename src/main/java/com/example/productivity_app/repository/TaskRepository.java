@@ -53,7 +53,7 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
     WHERE u.username = :username
     AND NOT EXISTS (
         SELECT 1 FROM tasks t
-        WHERE (
+        WHERE ( 
             (:endDate = t.start_date AND :endTime > t.start_time) OR :endDate > t.start_date
         )
         AND (

@@ -3,16 +3,18 @@ package com.example.productivity_app.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Getter
 @Setter
-@Table(name = "tasks", schema = "productivity_app_db")
+@Table(name = "tasks")
 public class Task {
 
     @Id

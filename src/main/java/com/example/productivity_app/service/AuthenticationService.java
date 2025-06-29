@@ -42,21 +42,17 @@ public class AuthenticationService {
         user.setVerificationCodeExpiresAt(LocalDateTime.now().plusMinutes(10));
         user.setEnabled(false);
         sendVerificationEmail(user);
-        System.out.println("Verification code sent to email");
         return userRepository.save(user);
     }
 
     public User authenticate(LoginUserDto input) {
-        System.out.println("Going to authenticate the user");
         User user = userRepository.findByEmail(input.getEmail())
                 .orElseThrow(()-> new RuntimeException("User not found"));
 
         if(!user.isEnabled()) {
             throw new RuntimeException("Account not verified. Please verify your account");
         }
-        System.out.println("User found and enabled");
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(input.getEmail(), input.getPassword()));
-        System.out.println("User authenticated");
         return user;
     }
 
@@ -64,11 +60,9 @@ public class AuthenticationService {
         Optional<User> optionalUser = userRepository.findByEmail(input.getEmail());
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
-            //code entered too late
             if(user.getVerificationCodeExpiresAt().isBefore(LocalDateTime.now())) {
                 throw new RuntimeException("Verification code has expired");
             }
-            //successful verification of account
             if(user.getVerificationCode().equals(input.getVerificationCode())) {
                 user.setEnabled(true);
                 user.setVerificationCode(null);

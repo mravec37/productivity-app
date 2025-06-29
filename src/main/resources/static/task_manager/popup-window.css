@@ -24,7 +24,7 @@
 #close-modal {
     color: #aaa;
     float: right;
-    font-size: 28px;
+    font-size: 40px;
     font-weight: bold;
     cursor: pointer;
 }
@@ -140,7 +140,7 @@
 #close-modal-update {
     color: #aaa;
     float: right;
-    font-size: 28px;
+    font-size: 40px;
     font-weight: bold;
     cursor: pointer;
 }
@@ -297,7 +297,7 @@
     display: block;
     margin: 10px auto;
     padding: 10px;
-    width: calc(100% - 40px);
+    width: calc(100% - 20px);
     max-width: 400px;
     font-size: 16px;
     border-radius: 5px;
@@ -370,7 +370,7 @@
     display: block;
     margin: 10px auto;
     padding: 10px;
-    width: calc(100% - 40px);
+    width: calc(100% - 20px);
     max-width: 400px;
     font-size: 16px;
     border-radius: 5px;
@@ -412,6 +412,51 @@
     outline: 3px solid #000;
     /*transform: scale(1.1);*/
 }
+
+/* Styles for the success popup */
+.success-popup {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4CAF50; /* Green background */
+    color: white;
+    padding: 15px 25px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1.1em;
+    z-index: 1001; /* Above the modal */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.success-popup.show {
+    opacity: 1;
+}
+
+
+
+.form-row {
+  display: flex;
+  align-items: center;
+  /*margin-bottom: 10px;*/
+}
+
+.form-row label {
+  width: 100px; /* or any fixed width */
+  margin-right: 10px;
+  text-align: right;
+}
+
+.form-row input,
+.form-row textarea {
+  flex: 1;
+  padding: 5px;
+}
+
+
 
 /*#task-modal-update button {
     display: block;

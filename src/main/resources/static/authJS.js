@@ -1,5 +1,5 @@
-const baseUrl = 'http://localhost:8080/auth';
-const apiBaseUrl = 'http://localhost:8080';
+const API_BASE_URL = 'https://ba12-46-151-56-119.ngrok-free.app'; // <--- This is the variable you can edit
+const AUTH_BASE_URL = `${API_BASE_URL}/auth`;
 
 const signupForm = document.getElementById('signup-form');
 const verifySection = document.getElementById('verify-section');
@@ -17,7 +17,7 @@ signupForm.addEventListener('submit', async (e) => {
     const email = document.getElementById('signup-email').value;
     const password = document.getElementById('signup-password').value;
 
-    const response = await fetch(`${baseUrl}/signup`, {
+    const response = await fetch(`${AUTH_BASE_URL}/signup`, { // <--- AUTH_BASE_URL used here
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password, username })
@@ -36,7 +36,7 @@ signupForm.addEventListener('submit', async (e) => {
 verifyBtn.addEventListener('click', async () => {
     const verificationCode = document.getElementById('verify-code').value;
 
-    const response = await fetch(`${baseUrl}/verify`, {
+    const response = await fetch(`${AUTH_BASE_URL}/verify`, { // <--- AUTH_BASE_URL used here
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: tempEmail, verificationCode })
@@ -47,7 +47,7 @@ verifyBtn.addEventListener('click', async () => {
 
         const password = document.getElementById('signup-password').value;
 
-        const loginResponse = await fetch(`${baseUrl}/authenticate`, {
+        const loginResponse = await fetch(`${AUTH_BASE_URL}/authenticate`, { // <--- AUTH_BASE_URL used here
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email: tempEmail, password })
@@ -69,7 +69,7 @@ verifyBtn.addEventListener('click', async () => {
 });
 
 resendBtn.addEventListener('click', async () => {
-    const response = await fetch(`${baseUrl}/resend?email=${encodeURIComponent(tempEmail)}`, {
+    const response = await fetch(`${AUTH_BASE_URL}/resend?email=${encodeURIComponent(tempEmail)}`, { // <--- AUTH_BASE_URL used here
         method: 'POST'
     });
 
@@ -87,7 +87,7 @@ loginForm.addEventListener('submit', async (e) => {
     const email = document.getElementById('login-email').value;
     const password = document.getElementById('login-password').value;
 
-    const response = await fetch(`${baseUrl}/authenticate`, {
+    const response = await fetch(`${AUTH_BASE_URL}/authenticate`, { // <--- AUTH_BASE_URL used here
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })

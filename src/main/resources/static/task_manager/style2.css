@@ -17,7 +17,7 @@ body {
     background-color: #333;
     color: white;
     padding: 20px;
-    padding-top: 10px;
+    padding-top: 13px;
 }
 
 .menu h2 {
@@ -30,8 +30,12 @@ body {
 }
 
 .menu ul li {
-    margin: 15px 0;
+    margin: 23px 0;
     cursor: pointer;
+}
+
+.menu-elements {
+    margin-top: 40px;
 }
 
 .menu ul li:hover {
@@ -60,6 +64,11 @@ body {
 .hour {
     position: relative;
     height: 90px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 15px;
+    color: #2c2c2c; /* elegant dark tone */
+    padding: 4px 0;
+    letter-spacing: 0.5px;
 }
 
 .hours-wrapper {
@@ -180,7 +189,7 @@ h4 {
     background-color: #f9ba32;
     border-radius: 10px; /* Subtle rounding */
     padding: 20px;
-    padding-left: 110px;
+    padding-left: 90px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
     font-family: 'Arial', sans-serif; /* Clean, modern font */
 }
@@ -267,3 +276,26 @@ h4 {
 .delete-btn-task:hover {
     color: #ff2c2c; /* Red color when hovered */
 }
+
+li.highlight {
+    color: #4CAF50; /* Change to your desired color */
+}
+
+.logout-btn {
+  background: none;
+  border: none;
+  color: #e74c3c; /* Red */
+  font-size: 1.5rem; /* Bigger icon */
+  cursor: pointer;
+  padding: 12px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+
+  /* Center horizontally */
+  display: block;
+  margin: 80% auto 0 auto;
+}
+.logout-btn:hover {
+  background-color: rgba(231, 76, 60, 0.1);
+}
+

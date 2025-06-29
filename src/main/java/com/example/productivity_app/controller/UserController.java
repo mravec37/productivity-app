@@ -19,7 +19,6 @@ import java.util.List;
 
 @RequestMapping("/users")
 @Controller
-@CrossOrigin(origins = "http://localhost")
 public class UserController {
     private final UserService userService;
 
@@ -31,9 +30,7 @@ public class UserController {
     @GetMapping("/me")
     public ResponseEntity<User> authenticatedUser() {
         try {
-            System.out.println("Going to print current user");
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            System.out.println("PlaceHolder 1");
             User currentUser = (User) authentication.getPrincipal();
             if (currentUser == null) {
                 throw new RuntimeException("Invalid token");

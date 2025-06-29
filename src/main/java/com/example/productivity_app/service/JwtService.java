@@ -1,11 +1,8 @@
 package com.example.productivity_app.service;
 
 import com.example.productivity_app.entity.User;
-import io.jsonwebtoken.JwtParser;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
-import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -114,8 +111,18 @@ public class JwtService {
         return (user.getUsername().equals(userDetails.getUsername()) && !isTokenExpired(token)); //porovna sa email s username
     }
 
-    private boolean isTokenExpired(String token) {
+    /*public boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
+    }*/
+
+    public boolean isTokenExpired(String token) {
+        try {
+            Date expiration = extractExpiration(token);
+            return expiration.before(new Date());
+        } catch (ExpiredJwtException e) {
+            System.out.println("Token is expired.");
+            return true;
+        }
     }
 
     private Date extractExpiration(String token) {
@@ -123,7 +130,6 @@ public class JwtService {
     }
 
     private Claims extractAllClaims(String token) {
-        //Tu je chyba
         return Jwts.parserBuilder()
                 .setSigningKey(getSignInKey())
                 .build()

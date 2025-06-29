@@ -4,6 +4,7 @@
   <link rel="stylesheet" href="style2.css">
   <link rel="stylesheet" href="profileStyle.css">
   <link rel="stylesheet" href="popup-window.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Productivity Task Scheduler</title>
@@ -12,18 +13,23 @@
 <div class="container">
   <div class="menu">
     <!-- <img src="pictures/logo.png" alt="Logo" class="logo-img"> -->
-    <h2>Menu</h2>
+    <h3>ProductivityApp</h3>
+    <div class = "menu-elements">
     <ul>
-      <li>Rozvrh</li>
-      <li>Profil</li>
+      <li><i class="fa-solid fa-calendar-days"></i> Rozvrh</li>
+      <li class="highlight"><i class="fa-solid fa-user"></i> Profil</li>
     </ul>
+     <!-- <button id="menulogoutBtn" class="logout-btn" title="Log out">
+        <i class="fa-solid fa-power-off"></i>
+      </button> -->
+    </div>
   </div>
+
   <div class="scheduler">
     <div class="task-form">
       <h2>Profil</h2>
-      <p>Vitaj, <span id="usernameDisplay">Načítavam...</span>!</p>
+      <p><strong>Vitaj, <span id="usernameDisplay">Načítavam...</span>!</strong></p>
     </div>
-    <button id="logoutBtn" class="logout-button">Odhlásiť sa</button>
 
     <div class="info-boxes">
       <div id="taskSummary" class="info-box">
@@ -33,12 +39,15 @@
         <h3>Najdlhšia úloha</h3>
       </div>
       <div id="peakTaskDayInfo" class="info-box">
-        <h3>Najviac úloh v deň</h3>
+        <h3>Najviac úloh v dni</h3>
       </div>
     </div>
+
+    <button id="logoutBtn" class="logout-button">Odhlásiť sa</button>
 
   </div>
 </div>
 <script src="profileScript.js"></script>
+<script src="script2.js"></script>
 </body>
 </html>

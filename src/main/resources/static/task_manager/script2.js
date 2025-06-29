@@ -10,6 +10,10 @@ let currentTaskDayDiff;
 let lastUsedColor;
 let selectedTaskColor = null; // Variable to store the selected color
 let selectedTaskColorUpdate = null;
+const successPopup = document.getElementById('success-popup');
+
+// Define the base API URL
+const BASE_API_URL = 'https://ba12-46-151-56-119.ngrok-free.app'; // THIS IS THE NEW VARIABLE
 
 document.querySelectorAll('.color-btn-update').forEach(button => {
     button.addEventListener('click', () => {
@@ -47,7 +51,7 @@ async function fetchWithAuth(url, options = {}) {
 
   if (response.status === 401 || response.status === 403) {
     // Try refresh
-    const refreshResponse = await fetch("http://localhost:8080/auth/refresh-token", {
+    const refreshResponse = await fetch(`${BASE_API_URL}/auth/refresh-token`, { // Using BASE_API_URL
       method: "POST",
       credentials: "include"
     });
@@ -55,7 +59,7 @@ async function fetchWithAuth(url, options = {}) {
     if (!refreshResponse.ok) {
       console.warn("Refresh token expired or invalid");
       localStorage.removeItem("jwtToken");
-      window.location.href = "./index.html";
+      window.location.href = "../index.html";
       return;
     }
 
@@ -110,12 +114,15 @@ async function addTask() {
     const colors = ['#ff2c2c', '#007bff', '#4CAF50', '#8F00FF', '#FF6C3A', '#232C3B', '#ff007f', '#FFAA1D', '#2752D6'];
     let taskColor = selectedTaskColor;
 
+
     console.log("Chosen color for task is: " + taskColor);
 
     if (!startTime || !endTime || !startDate || !endDate || !taskName) {
         alert('Please fill out all required fields.');
         return;
     }
+
+    closeTaskModalNormal();
 
     const task = {
         taskName,
@@ -128,7 +135,7 @@ async function addTask() {
     };
 
     try {
-        const response = await fetchWithAuth('http://localhost:8080/task/createTask', {
+        const response = await fetchWithAuth(`${BASE_API_URL}/task/createTask`, { // Using BASE_API_URL
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -157,10 +164,13 @@ async function updateTask() {
     const endDate = document.getElementById('end-date-update').value;
     const taskDescription = document.getElementById('task-description-update').value;
 
+
     if (!startTime || !endTime || !startDate || !endDate || !taskName) {
         alert('Please fill out all required fields.');
         return;
     }
+
+    closeTaskModal();
 
     let taskColor = selectedTaskColorUpdate;
     const id = currentId;
@@ -177,7 +187,7 @@ async function updateTask() {
     };
 
     try {
-        const response = await fetchWithAuth('http://localhost:8080/task/updateTask', {
+        const response = await fetchWithAuth(`${BASE_API_URL}/task/updateTask`, { // Using BASE_API_URL
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -327,9 +337,24 @@ function createAndAppendTaskDiv(scheduler, taskName, taskDescription, startHours
     taskTitle.textContent = taskName;
 
     // Task description
-    const taskDesc = document.createElement('p');
+    /*const taskDesc = document.createElement('p');
     taskDesc.className = 'task-desc';
-    taskDesc.textContent = taskDescription;
+    taskDesc.textContent = taskDescription;*/
+
+    // Parse the dates into Date objects
+    const startDateTime = new Date(`${startDate}T${String(startHours).padStart(2, '0')}:${String(startMinutes).padStart(2, '0')}`);
+    const endDateTime = new Date(`${endDate}T${String(endHours).padStart(2, '0')}:${String(endMinutes).padStart(2, '0')}`);
+
+    const durationInMinutes = (endDateTime - startDateTime) / (1000 * 60); // Convert milliseconds to minutes
+
+    // Only add taskDesc if duration is >= 35 mins or spans multiple days
+    const isMultiDay = startDate !== endDate;
+    const taskDesc = document.createElement('p');
+    if (durationInMinutes >= 35 || isMultiDay) {
+         taskDesc.className = 'task-desc';
+         taskDesc.textContent = taskDescription;
+    }
+
     console.log("Hide delete button: " + hideDeleteButton);
     const currentTaskListLength = taskList.length;
 
@@ -463,6 +488,25 @@ function closeTaskModal() {
     document.body.classList.remove('modal-open');
 }
 
+function closeTaskModalNormal() {
+    const modal = document.getElementById('task-modal');
+
+    // Clear input fields (optional)
+    document.getElementById('task-name-update').value = '';
+    document.getElementById('start-time-update').value = '';
+    document.getElementById('end-time-update').value = '';
+    document.getElementById('start-date-update').value = '';
+    document.getElementById('end-date-update').value = '';
+    document.getElementById('task-description-update').value = '';
+
+    // Hide the modal
+    modal.style.display = 'none';
+
+    // Remove blur from the background
+    document.body.classList.remove('modal-open');
+    console.log("window closed");
+}
+
 // Function to delete the task
 async function deleteTask(id, index, dayDifference) {
     console.log("Index(length): " + index + " day diff: " + dayDifference);
@@ -472,7 +516,7 @@ async function deleteTask(id, index, dayDifference) {
     };
 
     try {
-        const response = await fetchWithAuth('http://localhost:8080/task/deleteTask', {
+        const response = await fetchWithAuth(`${BASE_API_URL}/task/deleteTask`, { // Using BASE_API_URL
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -511,6 +555,14 @@ function calculateTaskHeight(taskTop, endHours, endMinutes, hourHeight, hourDivs
 function clearTaskList() {
     taskList.length = 0;
 }
+
+function showSuccessPopup() {
+    successPopup.classList.add('show');
+    setTimeout(() => {
+        successPopup.classList.remove('show');
+    }, 3000); // Popup will disappear after 3 seconds
+}
+
 
 // Event listener for the Add Task button
 document.getElementById('add-task-btn').addEventListener('click', addTask);

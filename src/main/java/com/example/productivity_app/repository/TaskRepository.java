@@ -142,6 +142,7 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
         t.end_date < :nowDate OR
         (t.end_date = :nowDate AND t.end_time < :nowTime)
       )
+      AND CONCAT(t.start_date, ' ', t.start_time) <= CONCAT(t.end_date, ' ', t.end_time)
 """, nativeQuery = true)
     Integer countTotalTaskTimeInMinutes(@Param("id") long id,
                                     @Param("nowDate") LocalDate nowDate,

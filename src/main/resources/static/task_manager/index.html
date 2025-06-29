@@ -3,21 +3,29 @@
 <head>
     <link rel="stylesheet" href="style2.css">
     <link rel="stylesheet" href="popup-window.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500&display=swap" rel="stylesheet">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Productivity Task Scheduler</title>
 </head>
 <body>
 <div class="container">
-    <!-- Left Menu -->
     <div class="menu">
         <!-- <img src="pictures/logo.png" alt="Logo" class="logo-img"> -->
-        <h2>Menu</h2>
+        <h3>ProductivityApp</h3>
+        <div class = "menu-elements">
         <ul>
-            <li>Rozvrh</li>
-            <li>Profil</li>
+            <li class="highlight"><i class="fa-solid fa-calendar-days"></i> Rozvrh</li>
+            <li><i class="fa-solid fa-user"></i> Profil</li>
         </ul>
+        </div>
+        <!--<button id="menulogoutBtn" class="logout-btn" title="Log out">
+            <i class="fa-solid fa-power-off"></i>
+        </button>-->
     </div>
+
 
     <!-- Hourly Schedule -->
     <!-- Hourly Schedule -->
@@ -28,6 +36,10 @@
             <input type="date" id="chosen-date" placeholder="Dátum" required>
             <button id="next-date-btn">&gt;</button>
             <button id="create-task-popup">Pridať</button>
+        </div>
+
+        <div id="success-popup" class="success-popup">
+            Task created successfully!
         </div>
 
         <div id="task-modal" class="modal">

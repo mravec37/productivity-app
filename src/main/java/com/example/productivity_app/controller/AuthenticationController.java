@@ -7,6 +7,7 @@ import com.example.productivity_app.dto.user_authentication.VerifyUserDto;
 import com.example.productivity_app.entity.User;
 import com.example.productivity_app.service.AuthenticationService;
 import com.example.productivity_app.service.JwtService;
+import com.example.productivity_app.service.TokenBlacklistService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -14,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.CachingUserDetailsService;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,16 +22,18 @@ import java.util.Arrays;
 
 @RequestMapping("/auth")
 @RestController
-@CrossOrigin(origins = "http://localhost")
 public class AuthenticationController {
     private final JwtService jwtService;
     private final AuthenticationService authenticationService;
     @Autowired
     private UserDetailsService userDetailsService;
+    private final TokenBlacklistService tokenBlacklistService;
 
-    public AuthenticationController(JwtService jwtService, AuthenticationService authenticationService) {
+    public AuthenticationController(JwtService jwtService, AuthenticationService authenticationService,
+                                    TokenBlacklistService tokenBlacklistService) {
         this.jwtService = jwtService;
         this.authenticationService = authenticationService;
+        this.tokenBlacklistService = tokenBlacklistService;
     }
 
     @PostMapping("/signup")
@@ -68,7 +70,6 @@ public class AuthenticationController {
 
     @PostMapping("/refresh-token")
     public ResponseEntity<?> refreshToken(HttpServletRequest request) {
-        System.out.println("Call to refresh token");
         String refreshToken = Arrays.stream(request.getCookies())
                 .filter(cookie -> "refreshToken".equals(cookie.getName()))
                 .findFirst()
@@ -76,7 +77,6 @@ public class AuthenticationController {
                 .orElse(null);
 
         if (refreshToken == null) {
-            System.out.println("Refresh token missing");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Refresh token missing");
         }
 
@@ -97,6 +97,30 @@ public class AuthenticationController {
         return ResponseEntity.ok(new LoginResponse(newAccessToken));
     }
 
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(
+            HttpServletRequest request,
+            HttpServletResponse response
+    ) {
+        String header = request.getHeader("Authorization");
+        if (header != null && header.startsWith("Bearer ")) {
+            String token = header.substring(7);
+            tokenBlacklistService.blacklistToken(token);
+        }
+
+        // Remove refresh token cookie
+        ResponseCookie cookie = ResponseCookie.from("refreshToken", "")
+                .httpOnly(true)
+                .secure(true)
+                .path("/")
+                .maxAge(0)
+                .sameSite("Strict")
+                .build();
+
+        response.setHeader("Set-Cookie", cookie.toString());
+
+        return ResponseEntity.ok("Logged out successfully.");
+    }
 
 
     @PostMapping("/verify")

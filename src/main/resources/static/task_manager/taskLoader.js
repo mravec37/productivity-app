@@ -1,5 +1,8 @@
 let chosenDate;  // Define chosenDate in the global scope
 
+// Base URL for your API
+const API_BASE_URL = "https://ba12-46-151-56-119.ngrok-free.app"; // <--- This is the variable you can edit
+
 // Get all hour divs
 const hourDivs = document.querySelectorAll('.hour');
 const modal = document.getElementById('task-modal');
@@ -55,7 +58,7 @@ async function fetchWithAuth(url, options = {}) {
 
   if (response.status === 401 || response.status === 403) {
     // Try refresh
-    const refreshResponse = await fetch("http://localhost:8080/auth/refresh-token", {
+    const refreshResponse = await fetch(`${API_BASE_URL}/auth/refresh-token`, { // <--- API_BASE_URL used here
       method: "POST",
       credentials: "include"
     });
@@ -214,7 +217,7 @@ async function onDateSet() {
     updateDayInfo(startDate);
 
     console.log("Pytam si tasky");
-    const url = `http://localhost:8080/task/getTasks?startDate=${startDate}&endDate=${endDate}`;
+    const url = `${API_BASE_URL}/task/getTasks?startDate=${startDate}&endDate=${endDate}`; // <--- API_BASE_URL used here
 
     try {
         const response = await fetchWithAuth(url, {

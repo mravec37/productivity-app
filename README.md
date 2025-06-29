@@ -6,7 +6,7 @@ Webová aplikácia na správu denných úloh s overením e-mailu, štatistikami.
 
 ## 🔗 Vyskúšajte aplikáciu
 
-Link: [Kliknite sem a vyskúšajte ProductivityApp](https://tvoja-demo-url.com)  
+Link: [Kliknite sem a vyskúšajte ProductivityApp](https://ba12-46-151-56-119.ngrok-free.app/))  
 
 Môžete sa prihlásiť s účtom:
 
@@ -44,3 +44,4 @@ Registrácia pomocou gmail ešte nie je možná.
 - **Backend:** Spring Boot (Java)
 - **Frontend:** JavaScript, HTML, CSS
 - **Databáza:** MySQL
+- **Autentifikácia:** JWT tokeny

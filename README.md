@@ -4,6 +4,18 @@ Webová aplikácia na správu denných úloh s overením e-mailu, štatistikami.
 
 ---
 
+## 🔗 Vyskúšajte aplikáciu
+
+Link: [Kliknite sem a vyskúšajte ProductivityApp](https://tvoja-demo-url.com)  
+
+Môžete sa prihlásiť s účtom:
+
+- **Email:** login@telebit.sk
+- **Heslo:** 290303
+
+Registrácia pomocou gmail ešte nie je možná.
+---
+
 ## ✨ Funkcionalita
 
 - ✅ Registrácia používateľa cez e-mail.
@@ -32,6 +44,3 @@ Webová aplikácia na správu denných úloh s overením e-mailu, štatistikami.
 - **Backend:** Spring Boot (Java)
 - **Frontend:** JavaScript, HTML, CSS
 - **Databáza:** MySQL
-
----
-

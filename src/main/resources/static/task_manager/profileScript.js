@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://ba12-46-151-56-119.ngrok-free.app'; // <--- This is the variable you can edit
+const API_BASE_URL = 'https://ba12-46-151-56-119.ngrok-free.app';
 const AUTH_BASE_URL = `${API_BASE_URL}/auth`;
 const USERS_BASE_URL = `${API_BASE_URL}/users`;
 const TASK_BASE_URL = `${API_BASE_URL}/task`;
@@ -17,7 +17,7 @@ async function fetchWithAuth(url, options = {}) {
   });
 
   if (response.status === 401 || response.status === 403) {
-    const refreshResponse = await fetch(`${AUTH_BASE_URL}/refresh-token`, { // <--- AUTH_BASE_URL used here
+    const refreshResponse = await fetch(`${AUTH_BASE_URL}/refresh-token`, {
       method: "POST",
       credentials: "include"
     });
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   try {
-    const response = await fetchWithAuth(`${USERS_BASE_URL}/getUsername`, { method: "GET" }); // <--- USERS_BASE_URL used here
+    const response = await fetchWithAuth(`${USERS_BASE_URL}/getUsername`, { method: "GET" });
 
     if (!response.ok) throw new Error("Nepodarilo sa získať používateľské meno");
 
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   try {
-    const response = await fetchWithAuth(`${TASK_BASE_URL}/getTotalTaskTime`); // <--- TASK_BASE_URL used here
+    const response = await fetchWithAuth(`${TASK_BASE_URL}/getTotalTaskTime`);
 
     if (!response.ok) {
       const errorText = await response.text();
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   try {
-    const response = await fetchWithAuth(`${TASK_BASE_URL}/doneAndPlannedTasks`); // <--- TASK_BASE_URL used here
+    const response = await fetchWithAuth(`${TASK_BASE_URL}/doneAndPlannedTasks`);
 
     if (!response.ok) {
       window.location.href = 'index.html';
@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   try {
-    const response = await fetchWithAuth(`${TASK_BASE_URL}/getLongestTask`); // <--- TASK_BASE_URL used here
+    const response = await fetchWithAuth(`${TASK_BASE_URL}/getLongestTask`);
 
     if (!response.ok) throw new Error("Nepodarilo sa získať najdlhšiu úlohu");
 
@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (!token || !peakTaskDiv) return;
 
   try {
-    const response = await fetchWithAuth(`${TASK_BASE_URL}/peakTaskDay`); // <--- TASK_BASE_URL used here
+    const response = await fetchWithAuth(`${TASK_BASE_URL}/peakTaskDay`);
 
     if (!response.ok) throw new Error('Nepodarilo sa získať deň s najviac úlohami');
 

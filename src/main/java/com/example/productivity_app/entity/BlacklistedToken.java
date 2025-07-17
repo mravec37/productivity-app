@@ -24,7 +24,6 @@ public class BlacklistedToken {
     @Column
     private LocalDateTime blacklistedAt;
 
-    // Constructors
     public BlacklistedToken() {}
 
     public BlacklistedToken(String token) {

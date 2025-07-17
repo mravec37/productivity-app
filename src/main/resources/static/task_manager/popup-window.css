@@ -1,21 +1,21 @@
-/* Modal styles */
+
 #task-modal {
-    display: none; /* Hidden by default */
+    display: none;
     position: fixed;
     z-index: 1000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto; /* Enable scrolling if needed */
+    overflow: auto;
 }
 
 #task-modal .modal-content {
     background-color: #fff;
-    margin: 15% auto; /* Center the modal */
+    margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; /* Adjust as necessary */
+    width: 80%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
 }
@@ -81,9 +81,9 @@
 
 /* Button Hover Effect */
 #add-task-btn:hover {
-    background: linear-gradient(to right, #45A049, #3e8e41); /* Slightly darker gradient on hover */
-    transform: translateY(-2px); /* Subtle lift effect */
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+    background: linear-gradient(to right, #45A049, #3e8e41);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
 
 #add-task-btn:hover {
@@ -98,15 +98,15 @@
 
 /* Blur effect styles */
 .modal {
-    display: none; /* Hidden by default */
+    display: none;
     position: fixed;
     z-index: 1000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent black */
-    backdrop-filter: blur(5px); /* Apply the blur effect */
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px);
 }
 
 .modal-content {
@@ -114,24 +114,19 @@
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; /* Adjust as necessary */
+    width: 80%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
-    position: relative; /* Ensure modal-content is not affected by the blur */
+    position: relative;
     z-index: 1001;
 }
 
-/*UPDATE*/
-
-
-
-
 #task-modal-update .modal-content-update {
     background-color: #fff;
-    margin: 15% auto; /* Center the modal */
+    margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; /* Adjust as necessary */
+    width: 80%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
 }
@@ -151,8 +146,6 @@
     text-decoration: none;
 }
 
-
-/* Modal styles */
 #task-modal-update {
     display: none;
     position: fixed;
@@ -163,7 +156,6 @@
     height: 100%;
     overflow: auto;
 }
-
 
 #task-modal-update button:hover {
     background-color: #bbb;
@@ -204,9 +196,9 @@
 
 /* Button Hover Effect */
 #add-task-btn-update:hover {
-    background: linear-gradient(to right, #45A049, #3e8e41); /* Slightly darker gradient on hover */
-    transform: translateY(-2px); /* Subtle lift effect */
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+    background: linear-gradient(to right, #45A049, #3e8e41);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* Blur effect for background */
@@ -217,15 +209,15 @@
 
 /* Blur effect styles */
 .modal-update {
-    display: none; /* Hidden by default */
+    display: none;
     position: fixed;
     z-index: 1000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent black */
-    backdrop-filter: blur(5px); /* Apply the blur effect */
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px);
 }
 
 .modal-content-update {
@@ -233,10 +225,10 @@
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; /* Adjust as necessary */
+    width: 80%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
-    position: relative; /* Ensure modal-content is not affected by the blur */
+    position: relative;
     z-index: 1001;
 }
 
@@ -250,7 +242,6 @@
 .task-fields {
     display: inline-block;
     width: 400px;
-    /*margin-left: 300px;*/
 }
 
 .task-options-container {
@@ -268,16 +259,16 @@
 
 /* Button Styling */
 #add-task-btn {
-    background: linear-gradient(to right, #4CAF50, #45A049); /* Smooth gradient */
+    background: linear-gradient(to right, #4CAF50, #45A049);
     color: white;
     border: none;
-    border-radius: 25px; /* More pronounced rounding for a pill shape */
+    border-radius: 25px;
     font-size: 1em;
     font-weight: bold;
     padding: 10px 20px;
     cursor: pointer;
-    transition: all 0.3s ease-in-out; /* Smooth transitions */
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15); /* Enhanced shadow for depth */
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
     margin-left: 25px;
 }
 
@@ -337,21 +328,20 @@
 
 .color-btn.selected {
     outline: 3px solid #000;
-    /*transform: scale(1.1);*/
 }
 
 /* Button Styling */
 #add-task-btn-update {
-    background: linear-gradient(to right, #4CAF50, #45A049); /* Smooth gradient */
+    background: linear-gradient(to right, #4CAF50, #45A049);
     color: white;
     border: none;
-    border-radius: 25px; /* More pronounced rounding for a pill shape */
+    border-radius: 25px;
     font-size: 1em;
     font-weight: bold;
     padding: 10px 20px;
     cursor: pointer;
-    transition: all 0.3s ease-in-out; /* Smooth transitions */
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15); /* Enhanced shadow for depth */
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
     margin-left: 25px;
 }
 
@@ -420,13 +410,13 @@
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #4CAF50; /* Green background */
+    background-color: #4CAF50;
     color: white;
     padding: 15px 25px;
     border-radius: 5px;
     text-align: center;
     font-size: 1.1em;
-    z-index: 1001; /* Above the modal */
+    z-index: 1001;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
@@ -437,15 +427,13 @@
 }
 
 
-
 .form-row {
   display: flex;
   align-items: center;
-  /*margin-bottom: 10px;*/
 }
 
 .form-row label {
-  width: 100px; /* or any fixed width */
+  width: 100px;
   margin-right: 10px;
   text-align: right;
 }
@@ -457,29 +445,3 @@
 }
 
 
-
-/*#task-modal-update button {
-    display: block;
-    margin: 10px auto;
-    padding: 10px;
-    width: calc(100% - 40px);
-    max-width: 400px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    background-color: #ddd;
-    cursor: pointer;
-}*/
-
-/*#task-modal button {
-    display: block;
-    margin: 10px auto;
-    padding: 10px;
-    width: calc(100% - 40px);
-    max-width: 400px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    background-color: #ddd;
-    cursor: pointer;
-}*/

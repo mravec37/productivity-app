@@ -1,10 +1,9 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-   /* background-color: #f0f0f0;*/
     background-color: white;
-    font-size: 16px; /* Confirm the font size */
-    line-height: 1.2; /* Set the line height explicitly */
+    font-size: 16px;
+    line-height: 1.2;
 }
 
 .container {
@@ -66,29 +65,26 @@ body {
     height: 90px;
     font-family: 'Manrope', sans-serif;
     font-size: 15px;
-    color: #2c2c2c; /* elegant dark tone */
+    color: #2c2c2c;
     padding: 4px 0;
     letter-spacing: 0.5px;
 }
 
 .hours-wrapper {
-    /*display: inline-block;
-    width: 19%;
-    margin-left: 10px;*/
     width: 90%;
-    border: 1px solid #ccc; /* Light gray border */
-    border-radius: 8px;      /* Rounded corners */
-    background-color: #f5f5f5; /* Slightly darker than white */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f5f5f5;
 }
 
 .hour:hover {
-    background-color: #e0e0e0; /* Darker shade than #f5f5f5 */
+    background-color: #e0e0e0;
 }
 
 hr {
     border: none;
-    border-top: 1px solid #ccc; /* Light gray color for the line */
-    margin: 0px; /* Remove margin to align with hours */
+    border-top: 1px solid #ccc;
+    margin: 0px;
 }
 
 
@@ -108,7 +104,7 @@ hr {
     font-size: 12px;
     margin: 0;
     padding: 5px 0;
-    color: #f0f0f0; /* A lighter color for the description */
+    color: #f0f0f0;
 }
 
 /* Update the task element's appearance */
@@ -123,14 +119,14 @@ hr {
     padding-bottom: 10px;
     box-sizing: border-box;
     margin-left: 72px;
-    width: calc(100% - 90px); /* Adjust the width to prevent overflow */
+    width: calc(100% - 90px);
     display: flex;
     flex-direction: column;
     transition: filter 0.2s ease;
 }
 
 .task:hover {
-    filter: brightness(76%); /* Darken the color by reducing brightness */
+    filter: brightness(76%);
 }
 
 .day-wrapper {
@@ -146,7 +142,6 @@ hr {
     background-color: white;
     padding-bottom: 20px;
 
-    /* Add borders to the left and right */
     border-left: 1px solid grey;
     border-right: 1px solid grey;
     border-top: 1px solid grey;
@@ -156,12 +151,12 @@ hr {
 }
 
 h4 {
-    margin: 6px; /* Adjust this value as needed */
+    margin: 6px;
 }
 .month {
-    color: grey;          /* Grey color for the text */
-    font-weight: 300;     /* Thin font */
-    text-transform: capitalize; /* Ensure the first letter is capitalized */
+    color: grey;
+    font-weight: 300;
+    text-transform: capitalize;
 }
 
 .half {
@@ -177,21 +172,20 @@ h4 {
 }
 
 .logo-img {
-    width: 120px; /* Adjust size */
-    height: auto; /* Maintain aspect ratio */
-    margin-right: 10px; /* Add space between logo and text */
-    vertical-align: middle; /* Align with text */
+    width: 120px;
+    height: auto;
+    margin-right: 10px;
+    vertical-align: middle;
 }
 
 /* General Form Styling */
 .task-form {
-    /*background-color: #f9f9f9;*/
     background-color: #f9ba32;
-    border-radius: 10px; /* Subtle rounding */
+    border-radius: 10px;
     padding: 20px;
     padding-left: 90px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    font-family: 'Arial', sans-serif; /* Clean, modern font */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
 }
 
 /* Header Styling */
@@ -202,40 +196,33 @@ h4 {
     text-align: center;
 }
 
-/* Input and Textarea Styling */
 .task-form input, .task-form textarea {
-    padding: 10px; /* Slightly increased padding */
+    padding: 10px;
     border: 1px solid #ddd;
-    border-radius: 8px; /* Rounded edges */
+    border-radius: 8px;
     font-size: 0.9em;
 }
 
 #task-description{
-    /*margin-top: 200px;*/
     height: 60px;
-    /*margin-left:350px;*/
 }
 
 #task-description-input{
-    /*margin-top: 200px;*/
     width: 300px;
     height: 150px;
-    padding: 10px; /* Slightly increased padding */
+    padding: 10px;
     border: 1px solid #ddd;
-    border-radius: 8px; /* Rounded edges */
+    border-radius: 8px;
     font-size: 0.9em;
 }
 
-/* Button Active Effect */
 #add-task-btn:active {
-    transform: translateY(1px); /* Pressed effect */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduced shadow */
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .date-navigation {
     display: inline-block;
-   /* align-items: center;
-    gap: 5px; *//* Space between the buttons and input */
 }
 
 .date-navigation button:hover {
@@ -270,28 +257,26 @@ h4 {
     color: white;
     font-size: 25px;
     font-weight: bold;
-    z-index: 10; /* Ensures it's always on top */
+    z-index: 10;
 }
 
 .delete-btn-task:hover {
-    color: #ff2c2c; /* Red color when hovered */
+    color: #ff2c2c;
 }
 
 li.highlight {
-    color: #4CAF50; /* Change to your desired color */
+    color: #4CAF50;
 }
 
 .logout-btn {
   background: none;
   border: none;
-  color: #e74c3c; /* Red */
-  font-size: 1.5rem; /* Bigger icon */
+  color: #e74c3c;
+  font-size: 1.5rem;
   cursor: pointer;
   padding: 12px;
   border-radius: 8px;
   transition: background-color 0.2s ease;
-
-  /* Center horizontally */
   display: block;
   margin: 80% auto 0 auto;
 }

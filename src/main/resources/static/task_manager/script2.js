@@ -1,4 +1,4 @@
-// Function to handle adding a new task
+
 let currentId;
 let currentTask;
 let taskList = [];
@@ -8,19 +8,17 @@ let currentTaskOffset;
 let currentTaskIndex;
 let currentTaskDayDiff;
 let lastUsedColor;
-let selectedTaskColor = null; // Variable to store the selected color
+let selectedTaskColor = null;
 let selectedTaskColorUpdate = null;
 const successPopup = document.getElementById('success-popup');
 
-// Define the base API URL
-const BASE_API_URL = 'https://ba12-46-151-56-119.ngrok-free.app'; // THIS IS THE NEW VARIABLE
+const BASE_API_URL = 'https://ba12-46-151-56-119.ngrok-free.app';
 
 document.querySelectorAll('.color-btn-update').forEach(button => {
     button.addEventListener('click', () => {
         selectedTaskColorUpdate = button.getAttribute('data-color');
         console.log('Selected color update:', selectedTaskColorUpdate);
 
-        // Optional: Add a visual indicator for the selected button
         document.querySelectorAll('.color-btn-update').forEach(btn => btn.classList.remove('selected'));
         button.classList.add('selected');
     });
@@ -31,7 +29,6 @@ document.querySelectorAll('.color-btn').forEach(button => {
         selectedTaskColor = button.getAttribute('data-color');
         console.log('Selected color:', selectedTaskColor);
 
-        // Optional: Add a visual indicator for the selected button
         document.querySelectorAll('.color-btn').forEach(btn => btn.classList.remove('selected'));
         button.classList.add('selected');
     });
@@ -50,8 +47,7 @@ async function fetchWithAuth(url, options = {}) {
   });
 
   if (response.status === 401 || response.status === 403) {
-    // Try refresh
-    const refreshResponse = await fetch(`${BASE_API_URL}/auth/refresh-token`, { // Using BASE_API_URL
+    const refreshResponse = await fetch(`${BASE_API_URL}/auth/refresh-token`, {
       method: "POST",
       credentials: "include"
     });
@@ -84,10 +80,8 @@ async function fetchWithAuth(url, options = {}) {
 
 
 function selectRandomColor() {
-    // Get all the color buttons
     const colorButtons = document.querySelectorAll('.color-btn');
 
-    // Ensure there are buttons available
     if (colorButtons.length === 0) return;
 
     // Randomly select a button
@@ -251,7 +245,6 @@ function createTaskElement(taskName, taskDescription, startTime, endTime, startD
     // Calculate the difference in days between chosenDate and taskStartDate
     const dayDifference = Math.floor((taskStartDate - chosenDateObj) / (1000 * 60 * 60 * 24));
 
-    // Check if dayDifference is within 0 to 4
     if (dayDifference > 4) {
         alert('Task date is out of the allowed range.');
         return;
@@ -276,7 +269,7 @@ function createTaskElement(taskName, taskDescription, startTime, endTime, startD
 
         let iterations = 5 - index;
         let lastDayEnd = false;
-        //to znamena ze sa task od zaciatku po koniec vojde do intervalu zobrazenia
+
         if(daysBetweenStartAndEnd < iterations) {
             lastDayEnd = true;
             iterations= daysBetweenStartAndEnd;
@@ -291,7 +284,7 @@ function createTaskElement(taskName, taskDescription, startTime, endTime, startD
             let startMinutesStart = i === 0 ? startMinutes : 0; // Use startMinutes for the first day
             let endHoursEnd = 23; // End at 24:00
             let endMinutesEnd = 59;
-            const hideButton = i === 0 ? false : true; // Explicitly define the boolean
+            const hideButton = i === 0 ? false : true;
             console.log("IsFirst: " + hideButton);
             createAndAppendTaskDiv(scheduler, taskName, taskDescription, startHoursStart, startMinutesStart, endHoursEnd, endMinutesEnd, hourDivs, id, startDate, endDate, hideButton, taskColor);
             index++;
@@ -301,7 +294,6 @@ function createTaskElement(taskName, taskDescription, startTime, endTime, startD
             const scheduler = document.querySelector(`#hours${index === 0 ? '' : index}`);
             let startHoursStart = 0;
             let startMinutesStart = 0;
-            //createAndAppendTaskDiv(scheduler, taskName, taskDescription, startHoursStart, startMinutesStart, endHours, endMinutes, hourDivs, id, true);
             createAndAppendTaskDiv(scheduler, taskName, taskDescription, startHoursStart, startMinutesStart, endHours, endMinutes, hourDivs, id, startDate, endDate, true, taskColor);
         }
         console.log("Im in startdate does not equal enddate");
@@ -327,19 +319,12 @@ function createTaskElement(taskName, taskDescription, startTime, endTime, startD
 }
 
 function createAndAppendTaskDiv(scheduler, taskName, taskDescription, startHours, startMinutes, endHours, endMinutes, hourDivs, id, startDate, endDate, hideDeleteButton, taskColor) {
-    // Create a new task element
     const task = document.createElement('div');
     task.className = 'task';
 
-    // Task title (taskName)
     const taskTitle = document.createElement('h3');
     taskTitle.className = 'task-title';
     taskTitle.textContent = taskName;
-
-    // Task description
-    /*const taskDesc = document.createElement('p');
-    taskDesc.className = 'task-desc';
-    taskDesc.textContent = taskDescription;*/
 
     // Parse the dates into Date objects
     const startDateTime = new Date(`${startDate}T${String(startHours).padStart(2, '0')}:${String(startMinutes).padStart(2, '0')}`);
@@ -347,7 +332,6 @@ function createAndAppendTaskDiv(scheduler, taskName, taskDescription, startHours
 
     const durationInMinutes = (endDateTime - startDateTime) / (1000 * 60); // Convert milliseconds to minutes
 
-    // Only add taskDesc if duration is >= 35 mins or spans multiple days
     const isMultiDay = startDate !== endDate;
     const taskDesc = document.createElement('p');
     if (durationInMinutes >= 35 || isMultiDay) {
@@ -359,11 +343,11 @@ function createAndAppendTaskDiv(scheduler, taskName, taskDescription, startHours
     const currentTaskListLength = taskList.length;
 
 
-   const taskStartDate = new Date(startDate); // assuming startDate is in 'YYYY-MM-DD' format
+   const taskStartDate = new Date(startDate);
    const taskEndDate = new Date(endDate);
    const chosenDateObj = new Date(chosenDate);
    const chosenDateEnd = new Date(chosenDate);
-   chosenDateEnd.setDate(chosenDateEnd.getDate() + 4); // Add 4 days to chosenDateObj
+   chosenDateEnd.setDate(chosenDateEnd.getDate() + 4);
 
    const relativeTaskStart = taskStartDate < chosenDateObj ? new Date(chosenDateObj) : new Date(taskStartDate);
    const relativeTaskEnd = taskEndDate > chosenDateEnd ? new Date(chosenDateEnd) : new Date(taskEndDate);
@@ -375,21 +359,19 @@ function createAndAppendTaskDiv(scheduler, taskName, taskDescription, startHours
         currentTaskOffset = 0;
         const closeButton = document.createElement('span');
         closeButton.className = 'delete-btn-task';
-        closeButton.innerHTML = '&times;'; // Add the '×' symbol
+        closeButton.innerHTML = '&times;';
 
-        // Capture the length at the time the event handler is set
         closeButton.onclick = (event) => {
-            console.log("Length when event was registered: " + currentTaskListLength); // Use captured value
+            console.log("Length when event was registered: " + currentTaskListLength);
             event.stopPropagation(); // Prevent triggering the parent element's click event
-            deleteTask(id, currentTaskListLength, dayDifference); // Pass the captured value
+            deleteTask(id, currentTaskListLength, dayDifference);
         };
 
-        task.appendChild(closeButton); // Add close button first
+        task.appendChild(closeButton);
     } else {
         currentTaskOffset++;
     }
 
-    // Append all elements to the task div
     task.appendChild(taskTitle);
     task.appendChild(taskDesc);
 
@@ -398,14 +380,6 @@ function createAndAppendTaskDiv(scheduler, taskName, taskDescription, startHours
     const startMinuteOffset = (startMinutes / 60) * hourHeight;
     const taskTop = hourDivs[startHours].offsetTop + startMinuteOffset;
     const taskHeight = calculateTaskHeight(taskTop, endHours, endMinutes, hourHeight, hourDivs);
-
-    // Position and style the task
-   /* const colors = ['#ff2c2c', '#007bff', '#4CAF50', '#8F00FF', '#FF6C3A', '#232C3B', '#ff007f', '#FFAA1D', '#2752D6'];
-    let randomColor;
-    do {
-        randomColor = colors[Math.floor(Math.random() * colors.length)];
-    } while (randomColor === lastUsedColor);
-    lastUsedColor = randomColor;*/
 
     console.log("Assigning color to task element, color is: " + taskColor);
     task.style.backgroundColor = taskColor;
@@ -419,7 +393,6 @@ function createAndAppendTaskDiv(scheduler, taskName, taskDescription, startHours
     const timeEnd = currentEndTime;
     task.addEventListener('click', () => openTaskModal(taskName, taskDescription, timeStart, timeEnd, startDate, endDate, id, currentTaskListLength - currentTaskOffset, dayDifference, taskColor));
 
-    // Add the task to the scheduler div
     taskList.push(task);
     scheduler.appendChild(task);
 }
@@ -435,8 +408,6 @@ function openTaskModal(taskName, taskDescription, startTime, endTime, startDate,
 
     // Pre-fill modal fields with task data
     document.getElementById('task-name-update').value = taskName;
-    //document.getElementById('start-time-update').value = `${startHours.toString().padStart(2, '0')}:${startMinutes.toString().padStart(2, '0')}`;
-    //document.getElementById('end-time-update').value = `${endHours.toString().padStart(2, '0')}:${endMinutes.toString().padStart(2, '0')}`;
     document.getElementById('start-time-update').value = startTime;
     document.getElementById('end-time-update').value = endTime;
     document.getElementById('start-date-update').value = startDate;
@@ -453,7 +424,6 @@ function openTaskModal(taskName, taskDescription, startTime, endTime, startDate,
 }
 
 function selectButtonByColor(colorHex) {
-    // Get all buttons
     const buttons = document.querySelectorAll('.color-btn-update');
 
     // Iterate through buttons to find the one with matching data-color
@@ -463,17 +433,14 @@ function selectButtonByColor(colorHex) {
             selectedTaskColorUpdate = colorHex;
             button.classList.add('selected');
         } else {
-            // Remove the 'selected' class from other buttons
             button.classList.remove('selected');
         }
     });
 }
 
-// Function to close the modal
 function closeTaskModal() {
     const modal = document.getElementById('task-modal-update');
 
-    // Clear input fields (optional)
     document.getElementById('task-name-update').value = '';
     document.getElementById('start-time-update').value = '';
     document.getElementById('end-time-update').value = '';
@@ -481,17 +448,14 @@ function closeTaskModal() {
     document.getElementById('end-date-update').value = '';
     document.getElementById('task-description-update').value = '';
 
-    // Hide the modal
     modal.style.display = 'none';
 
-    // Remove blur from the background
     document.body.classList.remove('modal-open');
 }
 
 function closeTaskModalNormal() {
     const modal = document.getElementById('task-modal');
 
-    // Clear input fields (optional)
     document.getElementById('task-name-update').value = '';
     document.getElementById('start-time-update').value = '';
     document.getElementById('end-time-update').value = '';
@@ -499,15 +463,12 @@ function closeTaskModalNormal() {
     document.getElementById('end-date-update').value = '';
     document.getElementById('task-description-update').value = '';
 
-    // Hide the modal
     modal.style.display = 'none';
 
-    // Remove blur from the background
     document.body.classList.remove('modal-open');
     console.log("window closed");
 }
 
-// Function to delete the task
 async function deleteTask(id, index, dayDifference) {
     console.log("Index(length): " + index + " day diff: " + dayDifference);
 
@@ -564,8 +525,6 @@ function showSuccessPopup() {
 }
 
 
-// Event listener for the Add Task button
 document.getElementById('add-task-btn').addEventListener('click', addTask);
 document.getElementById('add-task-btn-update').addEventListener('click', updateTask);
-// Close the modal when the close button is clicked
 document.getElementById('close-modal-update').addEventListener('click', () => closeTaskModal());

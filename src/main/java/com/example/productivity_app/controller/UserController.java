@@ -4,7 +4,11 @@ package com.example.productivity_app.controller;
 import com.example.productivity_app.dto.GetUserDoneAndPlannedTaskInfoDTO;
 import com.example.productivity_app.entity.User;
 import com.example.productivity_app.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -26,6 +30,7 @@ public class UserController {
         this.userService = userService;
     }
 
+    private static final Logger logger = LoggerFactory.getLogger(TaskController.class);
 
     @GetMapping("/me")
     public ResponseEntity<User> authenticatedUser() {
@@ -33,13 +38,14 @@ public class UserController {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             User currentUser = (User) authentication.getPrincipal();
             if (currentUser == null) {
-                throw new RuntimeException("Invalid token");
+                throw new AuthenticationCredentialsNotFoundException("Invalid token or authentication missing");
             }
             return ResponseEntity.ok(currentUser);
 
-        } catch (Exception e) {
+        } catch (AuthenticationCredentialsNotFoundException e) {
             e.printStackTrace();
-            return null;
+            logger.warn("Invalid authentication during /me query");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
 
@@ -49,13 +55,14 @@ public class UserController {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             User currentUser = (User) authentication.getPrincipal();
             if (currentUser == null) {
-                throw new RuntimeException("Invalid token");
+                throw new AuthenticationCredentialsNotFoundException("Invalid token or authentication missing");
             }
             return ResponseEntity.ok(currentUser.getUsername());
 
-        } catch (Exception e) {
+        } catch (AuthenticationCredentialsNotFoundException e) {
             e.printStackTrace();
-            return null;
+            logger.warn("Invalid authentication during getUsername query");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
 

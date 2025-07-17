@@ -24,23 +24,31 @@ public class SecurityConfig {
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
 
+    /**
+     * Configures Spring Security for the application.
+     * - Disables CSRF protection because the app uses stateless JWT authentication.
+     * - Allows unrestricted access to public resources (auth endpoints, static assets).
+     * - Secures all other endpoints, requiring authentication.
+     * - Configures stateless session management- JWT authentication is stateless.
+     * - Registers a custom JWT filter before the UsernamePasswordAuthenticationFilter.
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(
-                                "/",                // Root URL
+                                "/",
                                 "/pictures/logo.png",
-                                "/index.html",   // Main HTML page
+                                "/index.html",
                                 "/auth.css",
-                                "/auth/**",                  // Auth endpoints
+                                "/auth/**",
                                 "/authJS.js",
-                                "/task_manager/**",          // Static frontend files
-                                "/js/**", "/css/**", "/images/**", // Optional: common static dirs
-                                "/favicon.ico"               // Optional: browser icon
+                                "/task_manager/**",
+                                "/js/**", "/css/**", "/images/**",
+                                "/favicon.ico"
                         ).permitAll()
-                        .anyRequest().authenticated()   // Everything else requires auth
+                        .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

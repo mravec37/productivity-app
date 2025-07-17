@@ -1,6 +1,5 @@
 package com.example.productivity_app.repository;
 
-import com.example.productivity_app.dto.PeakTaskDayDTO;
 import com.example.productivity_app.entity.Task;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,7 +16,7 @@ import java.util.Optional;
 
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long> {
-    // Custom query methods (if needed) can be added here
+
     List<Task> findByStartDate(LocalDate startDate);
 
     @Query("SELECT t FROM Task t WHERE " +
@@ -26,14 +25,6 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
     List<Task> findTasksByStartOrEndTimeInRange(@Param("startDate") LocalDate startDate,
                                                 @Param("endDate") LocalDate endDate);
 
-    /*@Query("SELECT t FROM Task t WHERE " +
-            "((t.startDate BETWEEN :startDate AND :endDate) " +
-            "OR (t.startDate < :startDate AND t.endDate >= :startDate)) " +
-            "AND t.user.id = (SELECT u.id FROM User u WHERE u.email = :userEmail)")
-    List<Task> findTasksByUsernameAndStartOrEndTimeInRange(
-            @Param("userEmail") String userEmail,
-            @Param("startDate") LocalDate startDate,
-            @Param("endDate") LocalDate endDate);*/
     @Query("SELECT t FROM Task t JOIN FETCH t.user u WHERE " +
             "((t.startDate BETWEEN :startDate AND :endDate) " +
             "OR (t.startDate < :startDate AND t.endDate >= :startDate)) " +
@@ -81,27 +72,6 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
             @Param("startTime") LocalTime startTime,
             @Param("userName") String userName);
 
-    /*@Modifying
-    @Transactional
-    @Query(value = "INSERT INTO tasks (task_name, start_time, end_time, start_date, end_date, task_description, task_color, user_id) " +
-            "SELECT :taskName, :startTime, :endTime, :startDate, :endDate, :taskDescription, :taskColor, :userId " +
-            "WHERE NOT EXISTS (" +
-            "    SELECT 1 FROM tasks t " +
-            "    WHERE ((:endDate = t.start_date AND :endTime > t.start_time ) OR :endDate > t.start_date) " +
-            "    AND ((t.end_date = :startDate AND :startTime < t.end_time ) OR :startDate < t.end_date)" +
-            ")",
-            nativeQuery = true)
-    int createTaskIfNoOverlap(@Param("taskName") String taskName,
-                              @Param("startTime") LocalTime startTime,
-                              @Param("endTime") LocalTime endTime,
-                              @Param("startDate") LocalDate startDate,
-                              @Param("endDate") LocalDate endDate,
-                              @Param("taskDescription") String taskDescription,
-                              @Param("taskColor") String taskColor,
-                              @Param("username") String username);*/
-
-
-
     @Query("SELECT COUNT(t) FROM Task t WHERE t.user.id = :userId AND (t.endDate < :nowDate OR (t.endDate = :nowDate AND t.endTime <= :nowTime))")
     int countDoneTasks(@Param("userId") Long userId, @Param("nowDate") LocalDate nowDate, @Param("nowTime") LocalTime nowTime);
 
@@ -118,7 +88,7 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
             "AND NOT EXISTS (" +
             "    SELECT 1 " +
             "    FROM (SELECT * FROM tasks) AS temp_tasks " +
-            "    WHERE temp_tasks.id != :id " + // Exclude the current task being updated
+            "    WHERE temp_tasks.id != :id " +
             "    AND ((:endDate = temp_tasks.start_date AND :endTime > temp_tasks.start_time) OR :endDate > temp_tasks.start_date) " +
             "    AND ((temp_tasks.end_date = :startDate AND :startTime < temp_tasks.end_time) OR :startDate < temp_tasks.end_date)" +
             ")",
@@ -155,15 +125,6 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
             nativeQuery = true)
     Optional<Task> getLongestTask(@Param("userId") long userId);
 
-   /* @Query(value = "SELECT t.start_date AS date, COUNT(*) AS task_count " +
-            "FROM tasks t " +
-            "WHERE t.user_id = :userId " +
-            "GROUP BY t.start_date " +
-            "ORDER BY task_count DESC " +
-            "LIMIT 1",
-            nativeQuery = true)
-    Map<String, Object> findPeakTaskDayForUser(@Param("userId") Long userId);*/
-
     @Query(value = """
                     SELECT active.day AS date, COUNT(*) AS task_count
                            FROM (
@@ -182,33 +143,5 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
                            
             """, nativeQuery = true)
     Map<String, Object> findPeakTaskDayForUser(@Param("userId") Long userId);
-
-
-
-
-
-
-    /*@Modifying
-    @Transactional
-    @Query(value = "UPDATE tasks " +
-            "SET task_name = :taskName, start_time = :startTime, end_time = :endTime, start_date = :startDate, end_date = :endDate, task_description = :taskDescription " +
-            "WHERE id = :id " +
-            "AND NOT EXISTS (" +
-            "    SELECT 1 FROM tasks t " +
-            "    WHERE t.id != :id " + // Exclude the current task being updated
-            "    AND ((:endDate = t.start_date AND :endTime > t.start_time ) OR :endDate > t.start_date) " +
-            "    AND ((t.end_date = :startDate AND :startTime < t.end_time ) OR :startDate < t.end_date)" +
-            ")",
-            nativeQuery = true)
-    int updateTaskIfNoOverlap(@Param("id") Long id,
-                              @Param("taskName") String taskName,
-                              @Param("startTime") LocalTime startTime,
-                              @Param("endTime") LocalTime endTime,
-                              @Param("startDate") LocalDate startDate,
-                              @Param("endDate") LocalDate endDate,
-                              @Param("taskDescription") String taskDescription);*/
-
-
-
 
 }

@@ -1,7 +1,7 @@
 let chosenDate;  // Define chosenDate in the global scope
 
 // Base URL for your API
-const API_BASE_URL = "https://ba12-46-151-56-119.ngrok-free.app"; // <--- This is the variable you can edit
+const API_BASE_URL = "https://ba12-46-151-56-119.ngrok-free.app";
 
 // Get all hour divs
 const hourDivs = document.querySelectorAll('.hour');
@@ -36,7 +36,7 @@ hourDivs.forEach((hourDiv, index) => {
     endTimeInput.value = endHour;
     startDateInput.value = formattedDate;
     endDateInput.value = formattedDate;
-    taskNameInput.value = ''; // Clear task name for new input
+    taskNameInput.value = '';
 
     selectRandomColor();
     // Open modal
@@ -58,7 +58,7 @@ async function fetchWithAuth(url, options = {}) {
 
   if (response.status === 401 || response.status === 403) {
     // Try refresh
-    const refreshResponse = await fetch(`${API_BASE_URL}/auth/refresh-token`, { // <--- API_BASE_URL used here
+    const refreshResponse = await fetch(`${API_BASE_URL}/auth/refresh-token`, {
       method: "POST",
       credentials: "include"
     });
@@ -140,23 +140,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-
-// Get modal and button elements
-//const modal = document.getElementById('task-modal');
-/*const createTaskBtn = document.getElementById('create-task-popup');
-const closeModalBtn = document.getElementById('close-modal');
-
-// Open modal when the "Pridať" button is clicked
-createTaskBtn.addEventListener('click', () => {
-    modal.style.display = 'block';
-
-});
-
-// Close modal when the "x" button is clicked
-closeModalBtn.addEventListener('click', () => {
-    modal.style.display = 'none';
-});*/
-
 // Close modal if user clicks outside of the modal content
 window.addEventListener('click', (event) => {
     if (event.target === modal) {
@@ -192,19 +175,11 @@ document.addEventListener("DOMContentLoaded", () => {
         chosenDate = `${year}-${month}-${day}`;
         dateInput.value = chosenDate;
 
-        // Call onDateSet to update the tasks and other elements
         onDateSet();
     }
 
-    // Attach event listeners to the buttons
     prevDateBtn.addEventListener('click', () => changeDate(-1));
     nextDateBtn.addEventListener('click', () => changeDate(1));
-
-    // Update chosenDate when the date input changes
-    /*dateInput.addEventListener('input', (event) => {
-        chosenDate = event.target.value;
-       // onDateSet();
-    });*/
 });
 
 
@@ -217,7 +192,7 @@ async function onDateSet() {
     updateDayInfo(startDate);
 
     console.log("Pytam si tasky");
-    const url = `${API_BASE_URL}/task/getTasks?startDate=${startDate}&endDate=${endDate}`; // <--- API_BASE_URL used here
+    const url = `${API_BASE_URL}/task/getTasks?startDate=${startDate}&endDate=${endDate}`;
 
     try {
         const response = await fetchWithAuth(url, {
@@ -251,7 +226,6 @@ async function onDateSet() {
         }
     } catch (error) {
         console.error('Error calling getTasks API:', error.message);
-        // Optionally redirect on auth error if fetchWithAuth didn't already handle it
     }
 }
 
@@ -278,17 +252,11 @@ function updateDayInfo(startDate) {
     }
 }
 
-// Function to clear all existing tasks in the scheduler divs
 function clearExistingTasks() {
-    // Select all divs with classes .hour, .hour1, .hour2, .hour3, .hour4
     const schedulerDivs = document.querySelectorAll('.hours, .hours1, .hours2, .hours3, .hours4');
 
-    // Loop through each scheduler div
     schedulerDivs.forEach(div => {
-        // Find all child elements with the class "task" inside this div
         const taskElements = div.querySelectorAll('.task');
-
-        // Remove each task element
         taskElements.forEach(task => task.remove());
     });
     clearTaskList();
@@ -313,8 +281,6 @@ function setChosenDate() {
     const day = String(today.getDate()).padStart(2, '0');
     const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-based
     const year = today.getFullYear();
-
-    //hideHoursBefore(10);
 
     // Format chosenDate as YYYY-MM-DD
     chosenDate = `${year}-${month}-${day}`;

@@ -1,6 +1,7 @@
 package com.example.productivity_app.service;
 
 import com.example.productivity_app.dto.PeakTaskDayDTO;
+import com.example.productivity_app.dto.TaskDTO;
 import com.example.productivity_app.entity.Task;
 import com.example.productivity_app.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,40 +15,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+
+/**
+ * Service for managing tasks.
+ * Handles creating, updating, deleting, and fetching tasks,
+ * checking for overlaps, and getting task stats.
+ */
 @Service
 public class TaskService {
 
     @Autowired
     private TaskRepository taskRepository;
 
-    public Task createTask(String taskName, LocalTime startTime, LocalTime endTime,
-                           LocalDate startDate, LocalDate endDate, String taskDescription) {
-        Task task = new Task();
-        task.setTaskName(taskName);
-        task.setStartTime(startTime);
-        task.setEndTime(endTime);
-        task.setStartDate(startDate);
-        task.setEndDate(endDate);
-        task.setTaskDescription(taskDescription);
-        taskRepository.save(task);
-
-        return task;
-    }
-
-    public List<Task> getTasksByDate(LocalDate date) {
-        return taskRepository.findByStartDate(date);
-    }
-
-    public List<Task> getTasksByDate(LocalDate startDate, LocalDate endDate) {
-        return taskRepository.findTasksByStartOrEndTimeInRange(startDate, endDate);
-    }
-
     public boolean createTaskIfNoOverlap(String taskName, LocalTime startTime, LocalTime endTime, LocalDate startDate, LocalDate endDate, String taskDescription, String taskColor, String username) {
         int result = taskRepository.createTaskIfNoOverlap(
                 taskName, startTime, endTime, startDate, endDate, taskDescription, taskColor, username
         );
 
-        // If the repository returns 1, the task was created successfully
         return result > 0;
     }
 
@@ -56,7 +40,6 @@ public class TaskService {
                 id, taskName, startTime, endTime, startDate, endDate, taskDescription, taskColor
         );
 
-        // If the repository returns 1, the task was created successfully
         return result > 0;
     }
 
@@ -98,7 +81,6 @@ public class TaskService {
         long minutes = Duration.between(startDateTime, endDateTime).toMinutes();
         double hours = minutes / 60.0;
 
-        // Round to 1 decimal place
         return Math.round(hours * 10.0) / 10.0;
     }
 
@@ -112,4 +94,17 @@ public class TaskService {
         return new PeakTaskDayDTO(date, taskCount);
     }
 
+    public Task createAndFillTask(TaskDTO taskDTO) {
+        Task task = new Task();
+        task.setTaskName(taskDTO.getTaskName());
+        task.setId(taskDTO.getId());
+        task.setTaskDescription(taskDTO.getTaskDescription());
+        task.setStartDate(taskDTO.getStartDate());
+        task.setEndDate(taskDTO.getEndDate());
+        task.setStartTime(taskDTO.getStartTime());
+        task.setEndTime(taskDTO.getEndTime());
+        task.setTaskColor(taskDTO.getTaskColor());
+
+        return task;
+    }
 }

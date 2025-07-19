@@ -1,9 +1,12 @@
 package com.example.productivity_app.controller;
 
 import com.example.productivity_app.dto.user_authentication.RegisterUserDto;
+import com.example.productivity_app.dto.user_authentication.VerifyUserDto;
 import com.example.productivity_app.entity.User;
 import com.example.productivity_app.service.AuthenticationService;
 import com.example.productivity_app.service.JwtService;
+import com.example.productivity_app.service.TokenBlacklistService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -16,10 +19,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.time.LocalDateTime;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(controllers = AuthenticationController.class)
 @AutoConfigureMockMvc(addFilters = false)
@@ -37,6 +40,8 @@ class AuthenticationControllerTest {
     @MockBean
     private UserDetailsService userDetailsService;
 
+    @MockBean
+    private TokenBlacklistService tokenBlacklistService;
 
     @Test
     void shouldRegisterUserSuccessfully() throws Exception {
@@ -68,5 +73,20 @@ class AuthenticationControllerTest {
                 .andExpect(jsonPath("$.username").value("testuser"))
                 .andExpect(jsonPath("$.email").value("test@example.com"))
                 .andExpect(jsonPath("$.enabled").value(false));
+    }
+
+    @Test
+    void shouldVerifyUserSuccessfully() throws Exception {
+        VerifyUserDto dto = new VerifyUserDto();
+        dto.setEmail("test@example.com");
+        dto.setVerificationCode("123456");
+
+        doNothing().when(authenticationService).verifyUser(any(VerifyUserDto.class));
+
+        mockMvc.perform(post("/auth/verify")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(new ObjectMapper().writeValueAsString(dto)))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Account verified successfully"));
     }
 }

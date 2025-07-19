@@ -1,5 +1,6 @@
 package com.example.productivity_app.service;
 
+import com.example.productivity_app.dto.user_authentication.LoginUserDto;
 import com.example.productivity_app.dto.user_authentication.RegisterUserDto;
 import com.example.productivity_app.entity.User;
 import com.example.productivity_app.repository.UserRepository;
@@ -16,11 +17,15 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -41,6 +46,27 @@ class AuthenticationServiceTest {
 
     @InjectMocks
     private AuthenticationService authenticationService;
+
+
+    @Test
+    void shouldAuthenticateAndReturnUser_WhenCredentialsAreValid() {
+        LoginUserDto input = new LoginUserDto("test@example.com", "password123");
+
+        User mockUser = new User();
+        mockUser.setEmail("test@example.com");
+        mockUser.setEnabled(true);
+
+        when(userRepository.findByEmail("test@example.com"))
+                .thenReturn(Optional.of(mockUser));
+
+        when(authenticationManager.authenticate(any()))
+                .thenReturn(mock(Authentication.class));
+
+        User result = authenticationService.authenticate(input);
+
+        assertEquals(mockUser, result);
+        verify(authenticationManager).authenticate(any(UsernamePasswordAuthenticationToken.class));
+    }
 
     @Test
     void shouldCreateDisabledUserWithVerificationCodeAndEncryptedPassword() throws MessagingException {

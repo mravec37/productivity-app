@@ -25,7 +25,7 @@ Môžete sa prihlásiť s účtom:
 - ❌ Ak sa nový task časovo prekrýva s existujúcim, nebude vytvorený.
 - ✏️ Úprava taskov – premenovanie, zmena času, zmena farby.
 - 🗑️ Mazanie taskov.
-- 👤 Profilová stránka používateľa s prehľadnými štatistikami.
+- 👤 Profilová stránka používateľa so štatistikami.
 - 🚪 Odhlásenie z aplikácie.
 
 ---

@@ -6,7 +6,7 @@ Webová aplikácia na správu denných úloh s overením e-mailu, štatistikami.
 
 ## 🔗 Vyskúšajte aplikáciu
 
-Link: [Kliknite sem a vyskúšajte ProductivityApp](https://e0da7445882a.ngrok-free.app).
+Link: [Kliknite sem a vyskúšajte ProductivityApp](https://3bbdf3032e57.ngrok-free.app/).
 
 Registrácia pomocou gmail ešte nie je možná.
 
